@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *{ box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#080D18; color:#E9EEF7; font-family:'Manrope',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#5EE7D8; text-decoration:none; }
+  a:hover { color:#9BF4EA; }
+  input, textarea, select, button { font-family:inherit; }
+  input[type=range] { -webkit-appearance:none; appearance:none; width:100%; height:4px; border-radius:99px; background:#1E2B45; outline:none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:16px; height:16px; border-radius:99px; background:#0B1220; border:2px solid #5EE7D8; cursor:grab; box-shadow:0 0 0 4px rgba(94,231,216,.12); }
+  input[type=range].des::-webkit-slider-thumb { border-color:#C4A5FF; box-shadow:0 0 0 4px rgba(196,165,255,.12); }
+  input[type=range]::-moz-range-thumb { width:14px; height:14px; border-radius:99px; background:#0B1220; border:2px solid #5EE7D8; cursor:grab; }
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-thumb { background:#233252; border-radius:99px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::placeholder { color:#5C6E8C; }
+  @keyframes rise { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+  @keyframes pulseRing { 0%,100% { opacity:.35; } 50% { opacity:.9; } }
+</style>
+</helmet>
+
+<sc-if value="{{ needsLogin }}" hint-placeholder-val="{{ true }}">
+  <div style="min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;background:#080D18;background-image:radial-gradient(900px 520px at 20% -10%, rgba(94,231,216,.09), transparent 70%),radial-gradient(700px 480px at 92% 110%, rgba(196,165,255,.08), transparent 70%)">
+    <div style="padding:64px 60px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid #142036">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(140deg,#5EE7D8,#2F9FB8);display:flex;align-items:center;justify-content:center;color:#04121A;font-weight:800;font-size:15px;letter-spacing:-.5px">7S</div>
+        <div>
+          <div style="font-size:16px;font-weight:800;letter-spacing:-.3px">SevenSync</div>
+          <div style="font-size:10.5px;color:#7286A5;font-family:'JetBrains Mono',monospace;letter-spacing:.06em">ALIGNMENT STUDIO</div>
+        </div>
+      </div>
+      <div>
+        <h1 style="font-size:46px;line-height:1.06;letter-spacing:-1.8px;font-weight:800;margin:0 0 18px;max-width:16ch;text-wrap:balance">The McKinsey 7S framework, run as an engagement.</h1>
+        <p style="font-size:16px;line-height:1.65;color:#93A6C2;max-width:52ch;margin:0 0 30px;text-wrap:pretty">Score your organisation against its own strategy, see where the seven elements pull against each other, spend a budget on interventions and export the report.</p>
+        <div style="display:flex;gap:34px;flex-wrap:wrap">
+          <div><div style="font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#5EE7D8">28</div><div style="font-size:11.5px;color:#7286A5">scored items</div></div>
+          <div><div style="font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#5EE7D8">21</div><div style="font-size:11.5px;color:#7286A5">pairs tested</div></div>
+          <div><div style="font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#5EE7D8">12</div><div style="font-size:11.5px;color:#7286A5">interventions</div></div>
+        </div>
+      </div>
+      <div style="font-size:12.5px;color:#5C6E8C;line-height:1.6">Designed by <span style="color:#A8B9D2;font-weight:600">Dr. Kamran Hameed</span><br />McKinsey 7S Framework · Organisational Alignment Simulation</div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:center;padding:48px">
+      <div style="width:100%;max-width:378px">
+        <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:10px">SECURE ACCESS</div>
+        <h2 style="font-size:27px;font-weight:800;letter-spacing:-.8px;margin:0 0 8px">Sign in</h2>
+        <p style="font-size:13.5px;color:#8496B2;line-height:1.6;margin:0 0 26px">Enter your credentials to open the alignment studio.</p>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:12px;font-weight:600;color:#A8B9D2">Username</span>
+            <input value="{{ loginUser }}" onChange="{{ setLoginUser }}" onKeyDown="{{ loginKey }}" placeholder="Username" autocomplete="username" style="padding:13px 14px;border-radius:11px;border:1px solid #22314C;background:#0A1120;color:#E9EEF7;font-size:14px;outline:none" style-focus="border-color:#2C5F63" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:12px;font-weight:600;color:#A8B9D2">Password</span>
+            <input type="password" value="{{ loginPass }}" onChange="{{ setLoginPass }}" onKeyDown="{{ loginKey }}" placeholder="Password" autocomplete="current-password" style="padding:13px 14px;border-radius:11px;border:1px solid #22314C;background:#0A1120;color:#E9EEF7;font-size:14px;outline:none" style-focus="border-color:#2C5F63" />
+          </label>
+          <button onClick="{{ submitLogin }}" style="margin-top:6px;padding:14px;border-radius:11px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:14.5px;font-weight:700;cursor:pointer">Sign in</button>
+          <div style="font-size:12.5px;color:#E8A98B;min-height:18px">{{ loginError }}</div>
+        </div>
+        <div style="margin-top:22px;padding:14px 16px;border-radius:11px;border:1px dashed #22314C;font-size:12px;color:#7286A5;line-height:1.6">Access is issued by the study administrator. Credentials are validated on this device only — no data leaves your browser.</div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ authed }}">
+<div style="display:flex;min-height:100vh;background:#080D18;background-image:radial-gradient(900px 500px at 82% -8%, rgba(94,231,216,.07), transparent 70%),radial-gradient(700px 420px at 8% 105%, rgba(196,165,255,.06), transparent 70%)">
+
+  <aside style="width:266px;flex:0 0 266px;border-right:1px solid #16223A;background:rgba(9,15,27,.72);backdrop-filter:blur(8px);padding:26px 18px;display:flex;flex-direction:column;gap:26px;position:sticky;top:0;height:100vh;overflow-y:auto">
+    <div style="display:flex;align-items:center;gap:11px">
+      <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(140deg,#5EE7D8,#2F9FB8);display:flex;align-items:center;justify-content:center;color:#04121A;font-weight:800;font-size:14px;letter-spacing:-.5px">7S</div>
+      <div>
+        <div style="font-size:15px;font-weight:800;letter-spacing:-.3px">SevenSync</div>
+        <div style="font-size:10.5px;color:#7286A5;font-family:'JetBrains Mono',monospace;letter-spacing:.04em">ALIGNMENT STUDIO</div>
+      </div>
+    </div>
+
+    <nav style="display:flex;flex-direction:column;gap:3px">
+      <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#5C6E8C;letter-spacing:.12em;padding:0 10px 8px">WORKFLOW</div>
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="8">
+        <button onClick="{{ item.go }}" style="display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:9px 10px;border-radius:10px;border:1px solid {{ item.bd }};background:{{ item.bg }};color:{{ item.fg }};font-size:13.5px;font-weight:{{ item.fw }};cursor:pointer;transition:background .16s,color .16s" style-hover="background:#111C2F;color:#E9EEF7">
+          <span style="width:20px;height:20px;flex:0 0 20px;border-radius:6px;background:{{ item.badgeBg }};color:{{ item.badgeFg }};font-size:10px;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center">{{ item.n }}</span>
+          <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.label }}</span>
+          <span style="font-size:10px;color:{{ item.tickFg }}">{{ item.tick }}</span>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:14px">
+      <div style="border:1px solid #16223A;border-radius:12px;padding:13px;background:#0C1424">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+          <span style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.06em">ASSESSMENT</span>
+          <span style="font-size:12px;font-weight:700;color:#5EE7D8;font-family:'JetBrains Mono',monospace">{{ progress.pct }}%</span>
+        </div>
+        <div style="height:4px;border-radius:99px;background:#1A2740;overflow:hidden">
+          <div style="height:100%;width:{{ progress.pct }}%;background:linear-gradient(90deg,#5EE7D8,#C4A5FF);transition:width .4s"></div>
+        </div>
+        <div style="font-size:11px;color:#7286A5;margin-top:8px">{{ progress.label }}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <button onClick="{{ goAdmin }}" style="text-align:left;padding:8px 10px;border-radius:9px;border:1px solid #16223A;background:transparent;color:#8FA3C0;font-size:12px;cursor:pointer" style-hover="color:#E9EEF7;border-color:#25344F">Administrator console</button>
+        <button onClick="{{ logout }}" style="text-align:left;padding:8px 10px;border-radius:9px;border:1px solid #16223A;background:transparent;color:#8FA3C0;font-size:12px;cursor:pointer" style-hover="color:#E9EEF7;border-color:#25344F">Sign out</button>
+        <div style="font-size:10px;color:#4E5F7C;padding:0 10px;line-height:1.5">Framework by McKinsey · Designed by Dr. Kamran Hameed</div>
+      </div>
+    </div>
+  </aside>
+
+  <main style="flex:1;min-width:0;padding:38px 46px 90px;max-width:1240px">
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div style="animation:rise .5s ease both">
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;border:1px solid #1E3040;background:rgba(94,231,216,.07);font-size:11.5px;color:#5EE7D8;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;margin-bottom:26px">
+          <span style="width:6px;height:6px;border-radius:99px;background:#5EE7D8;animation:pulseRing 2.4s infinite"></span>
+          ORGANISATIONAL DIAGNOSTIC · v2
+        </div>
+        <h1 style="font-size:58px;line-height:1.02;letter-spacing:-2.4px;font-weight:800;margin:0 0 14px;max-width:15ch;text-wrap:balance">Diagnose the gap between what you plan and how you run.</h1>
+        <div style="font-size:13.5px;color:#7286A5;margin:0 0 20px;letter-spacing:.01em">Designed by <span style="color:#5EE7D8;font-weight:700">Dr. Kamran Hameed</span></div>
+        <p style="font-size:17.5px;line-height:1.65;color:#93A6C2;max-width:60ch;margin:0 0 34px;text-wrap:pretty">A full McKinsey 7S engagement in one workspace — score current against desired state, surface the tensions between elements, spend a real budget on interventions, and watch the second-order effects land before you commit.</p>
+
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:54px;flex-wrap:wrap">
+          <button onClick="{{ startFlow }}" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 12px 30px -12px rgba(94,231,216,.6)" style-hover="background:linear-gradient(135deg,#7DEFE2,#48C0D4)">{{ ctaLabel }} <span style="font-size:17px">&#8594;</span></button>
+          <button onClick="{{ loadDemo }}" style="padding:15px 22px;border-radius:12px;border:1px solid #22334F;background:transparent;color:#B9C8DE;font-size:14.5px;font-weight:600;cursor:pointer" style-hover="border-color:#3A4E70;color:#fff">Load a worked example</button>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch;margin-bottom:44px">
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:18px;padding:26px">
+            <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:6px">THE MODEL</div>
+            <div style="font-size:19px;font-weight:700;margin-bottom:18px;letter-spacing:-.4px">Seven elements, one system</div>
+            <div style="position:relative;width:100%;aspect-ratio:1/.86">
+              <sc-for list="{{ ringNodes }}" as="node" hint-placeholder-count="7">
+                <div style="position:absolute;left:{{ node.x }}%;top:{{ node.y }}%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px">
+                  <div style="width:{{ node.size }}px;height:{{ node.size }}px;border-radius:99px;background:{{ node.bg }};border:1px solid {{ node.bd }};display:flex;align-items:center;justify-content:center;color:{{ node.fg }};font-size:10px;font-weight:700;text-align:center;line-height:1.15;padding:6px">{{ node.short }}</div>
+                  <div style="font-size:10px;color:#6E82A0;font-family:'JetBrains Mono',monospace">{{ node.kind }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <p style="font-size:13px;line-height:1.6;color:#8496B2;margin:16px 0 0">Change one element and the other six move. Hard elements are easy to redraw; the four soft elements decide whether the redraw survives contact with reality.</p>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ homeFeatures }}" as="f" hint-placeholder-count="4">
+              <div style="background:#0D1626;border:1px solid #17233B;border-radius:14px;padding:18px 20px;display:flex;gap:15px;align-items:flex-start">
+                <div style="width:30px;height:30px;flex:0 0 30px;border-radius:9px;background:{{ f.tint }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;font-family:'JetBrains Mono',monospace;color:{{ f.ink }}">{{ f.n }}</div>
+                <div>
+                  <div style="font-size:14.5px;font-weight:700;margin-bottom:4px">{{ f.title }}</div>
+                  <div style="font-size:13px;line-height:1.55;color:#8496B2">{{ f.body }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#0A1120;border:1px solid #17233B;border-radius:18px;padding:30px 32px;margin-bottom:44px">
+          <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px">
+            <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#5EE7D8;letter-spacing:.12em">BEFORE YOU BEGIN</div>
+            <div style="font-size:12px;color:#6E82A0">Roughly 30–45 minutes</div>
+          </div>
+          <div style="font-size:23px;font-weight:800;letter-spacing:-.7px;margin-bottom:8px">What you need to know about your organisation</div>
+          <p style="font-size:14.5px;line-height:1.65;color:#93A6C2;max-width:74ch;margin:0 0 24px;text-wrap:pretty">The 7S framework only produces a useful diagnosis when it is fed real organisational detail. Gather the following before you start — you can save and return at any point, and everything is stored on this device as you type.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+            <sc-for list="{{ prepList }}" as="p" hint-placeholder-count="5">
+              <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:13px;background:#0D1626;border:1px solid #17233B">
+                <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:#5EE7D8;padding-top:2px">{{ p.n }}</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;margin-bottom:5px">{{ p.t }}</div>
+                  <div style="font-size:12.5px;line-height:1.6;color:#8496B2">{{ p.d }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:16px">
+            <sc-for list="{{ methodList }}" as="m" hint-placeholder-count="2">
+              <div style="padding:16px 18px;border-radius:13px;background:#0D1626;border:1px solid #1F2E48">
+                <div style="font-size:14px;font-weight:700;margin-bottom:6px;color:#C4A5FF">{{ m.t }}</div>
+                <div style="font-size:12.5px;line-height:1.65;color:#8496B2">{{ m.d }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:16px;padding:15px 18px;border-radius:12px;background:rgba(94,231,216,.05);border:1px solid #1C3040;font-size:13px;line-height:1.65;color:#A8B9D2">
+            <span style="font-weight:700;color:#E9EEF7">How to answer.</span> Every statement is scored twice — where the organisation is <span style="color:#5EE7D8;font-weight:600">today</span>, and where your strategy <span style="color:#C4A5FF;font-weight:600">needs it to be</span>. Score honestly rather than aspirationally: the distance between those two numbers is what the entire diagnosis, tension map and budget simulation are built from.
+          </div>
+        </div>
+
+        <div style="border-top:1px solid #17233B;padding-top:24px;display:flex;gap:44px;flex-wrap:wrap">
+          <div><div style="font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#5EE7D8">28</div><div style="font-size:12px;color:#7286A5">scored items, current vs desired</div></div>
+          <div><div style="font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#5EE7D8">21</div><div style="font-size:12px;color:#7286A5">element pairs tested for strain</div></div>
+          <div><div style="font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#5EE7D8">12</div><div style="font-size:12px;color:#7286A5">interventions with cascade effects</div></div>
+          <div><div style="font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#5EE7D8">{{ db.count }}</div><div style="font-size:12px;color:#7286A5">responses stored on this device</div></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isProfile }}">
+      <div style="animation:rise .35s ease both">
+        <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:8px">PHASE 01</div>
+        <h2 style="font-size:34px;font-weight:800;letter-spacing:-1.1px;margin:0 0 10px">Organisation profile</h2>
+        <p style="font-size:15px;color:#8FA3C0;margin:0 0 30px;max-width:64ch">Context calibrates the diagnosis. Budget and financial health set the constraints you will spend against in the simulation.</p>
+
+        <div style="display:flex;flex-direction:column;gap:18px;max-width:940px">
+          <sc-for list="{{ profileGroups }}" as="g" hint-placeholder-count="4">
+            <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:24px">
+              <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:18px">
+                <div style="font-size:16px;font-weight:700;letter-spacing:-.3px">{{ g.title }}</div>
+                <div style="font-size:12px;color:#6E82A0">{{ g.hint }}</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+                <sc-for list="{{ g.fields }}" as="f" hint-placeholder-count="4">
+                  <label style="display:flex;flex-direction:column;gap:7px;grid-column:span {{ f.span }}">
+                    <span style="font-size:12px;font-weight:600;color:#A8B9D2">{{ f.label }}</span>
+                    <sc-if value="{{ f.isSelect }}">
+                      <select value="{{ f.value }}" onChange="{{ f.set }}" style="padding:11px 12px;border-radius:10px;border:1px solid #22314C;background:#0A1120;color:#E9EEF7;font-size:13.5px;outline:none">
+                        <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="3">
+                          <option value="{{ o.v }}">{{ o.t }}</option>
+                        </sc-for>
+                      </select>
+                    </sc-if>
+                    <sc-if value="{{ f.isArea }}">
+                      <textarea value="{{ f.value }}" onChange="{{ f.set }}" rows="3" placeholder="{{ f.ph }}" style="padding:11px 12px;border-radius:10px;border:1px solid #22314C;background:#0A1120;color:#E9EEF7;font-size:13.5px;outline:none;resize:vertical;line-height:1.55"></textarea>
+                    </sc-if>
+                    <sc-if value="{{ f.isText }}">
+                      <input value="{{ f.value }}" onChange="{{ f.set }}" placeholder="{{ f.ph }}" style="padding:11px 12px;border-radius:10px;border:1px solid #22314C;background:#0A1120;color:#E9EEF7;font-size:13.5px;outline:none" />
+                    </sc-if>
+                  </label>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px;max-width:940px">
+          <div style="font-size:12px;color:#6E82A0">{{ saveNote }}</div>
+          <button onClick="{{ goAssessment }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:11px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:14.5px;font-weight:700;cursor:pointer">Continue to assessment <span>&#8594;</span></button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAssessment }}">
+      <div style="animation:rise .35s ease both">
+        <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:8px">PHASE 02</div>
+        <h2 style="font-size:34px;font-weight:800;letter-spacing:-1.1px;margin:0 0 10px">7S assessment</h2>
+        <p style="font-size:15px;color:#8FA3C0;margin:0 0 26px;max-width:66ch">Score each statement twice: where you are today, and where the strategy needs you to be. The distance between the two is the work.</p>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px">
+          <sc-for list="{{ sTabs }}" as="t" hint-placeholder-count="7">
+            <button onClick="{{ t.go }}" style="display:flex;flex-direction:column;gap:3px;padding:11px 15px;border-radius:11px;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;text-align:left;min-width:112px;transition:all .16s">
+              <span style="font-size:9.5px;font-family:'JetBrains Mono',monospace;letter-spacing:.08em;color:{{ t.kindFg }}">{{ t.kind }}</span>
+              <span style="font-size:13.5px;font-weight:700;letter-spacing:-.2px">{{ t.name }}</span>
+              <span style="font-size:10.5px;color:{{ t.kindFg }};font-family:'JetBrains Mono',monospace">{{ t.state }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="background:#0D1626;border:1px solid #17233B;border-radius:18px;padding:28px;max-width:1000px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:8px;flex-wrap:wrap">
+            <div>
+              <div style="font-size:22px;font-weight:800;letter-spacing:-.6px">{{ sec.name }}</div>
+              <div style="font-size:13.5px;color:#8496B2;margin-top:5px;max-width:62ch">{{ sec.blurb }}</div>
+            </div>
+            <div style="display:flex;gap:22px;padding:12px 16px;border-radius:12px;background:#0A1120;border:1px solid #1A2740">
+              <div><div style="font-size:9.5px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.06em">CURRENT</div><div style="font-size:21px;font-weight:800;color:#5EE7D8;font-family:'JetBrains Mono',monospace">{{ sec.cur }}</div></div>
+              <div><div style="font-size:9.5px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.06em">DESIRED</div><div style="font-size:21px;font-weight:800;color:#C4A5FF;font-family:'JetBrains Mono',monospace">{{ sec.des }}</div></div>
+              <div><div style="font-size:9.5px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.06em">GAP</div><div style="font-size:21px;font-weight:800;color:{{ sec.gapFg }};font-family:'JetBrains Mono',monospace">{{ sec.gap }}</div></div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:22px">
+            <sc-for list="{{ sec.items }}" as="it" hint-placeholder-count="4">
+              <div style="padding:18px 0;border-top:1px solid #16223A;display:grid;grid-template-columns:1fr 300px;gap:26px;align-items:center">
+                <div>
+                  <div style="font-size:14.5px;font-weight:600;line-height:1.45;margin-bottom:6px">{{ it.text }}</div>
+                  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                    <span style="font-size:11px;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:99px;background:rgba(94,231,216,.09);color:#5EE7D8">now · {{ it.curLabel }}</span>
+                    <span style="font-size:11px;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:99px;background:rgba(196,165,255,.09);color:#C4A5FF">target · {{ it.desLabel }}</span>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:11px">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <input type="range" min="1" max="10" step="1" value="{{ it.cur }}" onInput="{{ it.setCur }}" />
+                    <span style="width:26px;text-align:right;font-size:14px;font-weight:700;color:#5EE7D8;font-family:'JetBrains Mono',monospace">{{ it.cur }}</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <input type="range" class="des" min="1" max="10" step="1" value="{{ it.des }}" onInput="{{ it.setDes }}" />
+                    <span style="width:26px;text-align:right;font-size:14px;font-weight:700;color:#C4A5FF;font-family:'JetBrains Mono',monospace">{{ it.des }}</span>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="border-top:1px solid #16223A;padding-top:20px;margin-top:8px;display:grid;grid-template-columns:1fr 220px;gap:22px;align-items:start">
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-size:12px;font-weight:600;color:#A8B9D2">Evidence — what makes you score it this way?</span>
+              <textarea value="{{ sec.evidence }}" onChange="{{ sec.setEvidence }}" rows="3" placeholder="Cite an example, a metric, a recent incident..." style="padding:11px 12px;border-radius:10px;border:1px solid #22314C;background:#0A1120;color:#E9EEF7;font-size:13.5px;outline:none;resize:vertical;line-height:1.55"></textarea>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-size:12px;font-weight:600;color:#A8B9D2">Confidence · {{ sec.confLabel }}</span>
+              <input type="range" min="1" max="5" step="1" value="{{ sec.conf }}" onInput="{{ sec.setConf }}" />
+              <span style="font-size:11px;color:#6E82A0;line-height:1.5">Low confidence flags the score as an assumption to test, not a finding.</span>
+            </label>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:24px;max-width:1000px;flex-wrap:wrap">
+          <button onClick="{{ prevSection }}" style="padding:12px 20px;border-radius:11px;border:1px solid #22314C;background:transparent;color:#B9C8DE;font-size:14px;font-weight:600;cursor:pointer">&#8592; Previous</button>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="font-size:12px;color:#6E82A0">{{ saveNote }}</div>
+            <button onClick="{{ nextSection }}" style="padding:12px 20px;border-radius:11px;border:1px solid #22314C;background:transparent;color:#B9C8DE;font-size:14px;font-weight:600;cursor:pointer">Next &#8594;</button>
+            <button onClick="{{ submitAssessment }}" style="padding:13px 24px;border-radius:11px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:14.5px;font-weight:700;cursor:pointer">Submit &amp; see results</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isResults }}">
+      <div style="animation:rise .35s ease both">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px">
+          <div>
+            <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:8px">PHASE 03</div>
+            <h2 style="font-size:34px;font-weight:800;letter-spacing:-1.1px;margin:0 0 8px">Alignment dashboard</h2>
+            <p style="font-size:14.5px;color:#8FA3C0;margin:0">{{ orgLine }}</p>
+          </div>
+          <div style="display:flex;gap:9px;flex-wrap:wrap">
+            <button onClick="{{ exportReportPdf }}" style="padding:11px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:13px;font-weight:700;cursor:pointer">Save report (PDF)</button>
+            <button onClick="{{ exportReportHtml }}" style="padding:11px 16px;border-radius:10px;border:1px solid #2C5F63;background:rgba(94,231,216,.06);color:#9BF4EA;font-size:13px;font-weight:600;cursor:pointer">Save report (HTML)</button>
+            <button onClick="{{ exportOneCsv }}" style="padding:11px 16px;border-radius:10px;border:1px solid #22314C;background:transparent;color:#B9C8DE;font-size:13px;font-weight:600;cursor:pointer">Scores (CSV)</button>
+            <button onClick="{{ exportOneJson }}" style="padding:11px 16px;border-radius:10px;border:1px solid #22314C;background:transparent;color:#B9C8DE;font-size:13px;font-weight:600;cursor:pointer">Send to admin (JSON)</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:22px">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+            <div style="background:#0D1626;border:1px solid #17233B;border-radius:14px;padding:18px 20px">
+              <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:9px">{{ k.label }}</div>
+              <div style="font-size:32px;font-weight:800;letter-spacing:-1px;color:{{ k.fg }};font-family:'JetBrains Mono',monospace;line-height:1">{{ k.value }}</div>
+              <div style="font-size:12px;color:#8496B2;margin-top:7px">{{ k.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:grid;grid-template-columns:400px 1fr;gap:18px;margin-bottom:18px">
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px">
+            <div style="font-size:15.5px;font-weight:700;margin-bottom:2px">Current vs desired</div>
+            <div style="font-size:12px;color:#6E82A0;margin-bottom:6px">Teal is today. Violet is the target profile.</div>
+            <div style="position:relative;width:100%;margin-top:8px">
+              <svg viewBox="0 0 340 320" style="width:100%;height:auto;display:block;overflow:visible">
+                <sc-for list="{{ radar.rings }}" as="r" hint-placeholder-count="4">
+                  <polygon points="{{ r.points }}" fill="none" stroke="#1B2942" stroke-width="1"></polygon>
+                </sc-for>
+                <sc-for list="{{ radar.spokes }}" as="s" hint-placeholder-count="7">
+                  <line x1="170" y1="150" x2="{{ s.x }}" y2="{{ s.y }}" stroke="#1B2942" stroke-width="1"></line>
+                </sc-for>
+                <polygon points="{{ radar.des }}" fill="rgba(196,165,255,.13)" stroke="#C4A5FF" stroke-width="1.6" stroke-dasharray="4 3"></polygon>
+                <polygon points="{{ radar.cur }}" fill="rgba(94,231,216,.17)" stroke="#5EE7D8" stroke-width="2"></polygon>
+              </svg>
+              <sc-for list="{{ radar.labels }}" as="l" hint-placeholder-count="7">
+                <div style="position:absolute;left:{{ l.lx }}%;top:{{ l.ly }}%;transform:translate(-50%,-50%);font-size:10px;font-family:'JetBrains Mono',monospace;color:#8FA3C0;white-space:nowrap;pointer-events:none">{{ l.text }}</div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px">
+            <div style="font-size:15.5px;font-weight:700;margin-bottom:2px">Element scores and gaps</div>
+            <div style="font-size:12px;color:#6E82A0;margin-bottom:18px">Ranked by size of gap to target.</div>
+            <div style="display:flex;flex-direction:column;gap:13px">
+              <sc-for list="{{ bars }}" as="b" hint-placeholder-count="7">
+                <div>
+                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+                    <div style="display:flex;align-items:center;gap:9px">
+                      <span style="font-size:9.5px;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:5px;background:{{ b.kindBg }};color:{{ b.kindFg }}">{{ b.kind }}</span>
+                      <span style="font-size:13.5px;font-weight:650">{{ b.name }}</span>
+                    </div>
+                    <div style="display:flex;gap:12px;align-items:baseline;font-family:'JetBrains Mono',monospace">
+                      <span style="font-size:13px;color:#5EE7D8">{{ b.cur }}</span>
+                      <span style="font-size:11px;color:#4E5F7C">&#8594;</span>
+                      <span style="font-size:13px;color:#C4A5FF">{{ b.des }}</span>
+                      <span style="font-size:12px;color:{{ b.gapFg }};width:34px;text-align:right">{{ b.gapText }}</span>
+                    </div>
+                  </div>
+                  <div style="position:relative;height:7px;border-radius:99px;background:#141F34;overflow:hidden">
+                    <div style="position:absolute;left:0;top:0;height:100%;width:{{ b.des }}%;background:rgba(196,165,255,.28)"></div>
+                    <div style="position:absolute;left:0;top:0;height:100%;width:{{ b.cur }}%;background:linear-gradient(90deg,#38B0C4,#5EE7D8)"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px">
+            <div style="font-size:15.5px;font-weight:700;margin-bottom:2px">Hard vs soft balance</div>
+            <div style="font-size:12px;color:#6E82A0;margin-bottom:18px">Strategy, structure and systems are the levers you can pull. The four soft elements decide whether pulling them works.</div>
+            <div style="display:flex;gap:14px">
+              <sc-for list="{{ hardSoft }}" as="h" hint-placeholder-count="2">
+                <div style="flex:1;padding:18px;border-radius:13px;background:#0A1120;border:1px solid {{ h.bd }}">
+                  <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:8px">{{ h.label }}</div>
+                  <div style="font-size:30px;font-weight:800;font-family:'JetBrains Mono',monospace;color:{{ h.fg }};line-height:1">{{ h.score }}</div>
+                  <div style="font-size:12px;color:#8496B2;margin-top:8px;line-height:1.5">{{ h.members }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:16px;padding:14px 16px;border-radius:12px;background:rgba(94,231,216,.05);border:1px solid #1C3040;font-size:13px;line-height:1.6;color:#A8B9D2">{{ hardSoftNote }}</div>
+          </div>
+
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px">
+            <div style="font-size:15.5px;font-weight:700;margin-bottom:2px">Narrative diagnosis</div>
+            <div style="font-size:12px;color:#6E82A0;margin-bottom:18px">Generated from your scores, gaps and stated challenge.</div>
+            <div style="display:flex;flex-direction:column;gap:13px">
+              <sc-for list="{{ narrative }}" as="p" hint-placeholder-count="3">
+                <div style="display:flex;gap:12px;align-items:flex-start">
+                  <span style="width:5px;height:5px;flex:0 0 5px;border-radius:99px;background:#5EE7D8;margin-top:8px"></span>
+                  <div style="font-size:13.5px;line-height:1.65;color:#BCCADF">{{ p.text }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;margin-top:24px">
+          <button onClick="{{ goTensions }}" style="padding:13px 24px;border-radius:11px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:14.5px;font-weight:700;cursor:pointer">Continue to tension diagnosis &#8594;</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isTensions }}">
+      <div style="animation:rise .35s ease both">
+        <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:8px">PHASE 04</div>
+        <h2 style="font-size:34px;font-weight:800;letter-spacing:-1.1px;margin:0 0 10px">Tension diagnosis</h2>
+        <p style="font-size:15px;color:#8FA3C0;margin:0 0 26px;max-width:66ch">{{ tensionSummary }}</p>
+
+        <div style="display:grid;grid-template-columns:1fr;gap:18px;margin-bottom:18px">
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:6px">
+              <div>
+                <div style="font-size:15.5px;font-weight:700;margin-bottom:2px">Tension network</div>
+                <div style="font-size:12px;color:#6E82A0">Thicker, redder lines carry more strain. Click a line or a card to isolate it.</div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:center">
+                <span style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#E86B6B"><span style="width:14px;height:3px;border-radius:2px;background:#E86B6B"></span>CRITICAL</span>
+                <span style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#E8945C"><span style="width:14px;height:3px;border-radius:2px;background:#E8945C"></span>HIGH</span>
+                <span style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#E3C167"><span style="width:14px;height:3px;border-radius:2px;background:#E3C167"></span>MODERATE</span>
+              </div>
+            </div>
+            <div style="display:block;width:100%;max-width:700px;margin:10px auto 0">{{ graphSvg }}</div>
+            <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+              <sc-for list="{{ sevBars }}" as="s" hint-placeholder-count="3">
+                <div style="flex:1;min-width:110px;padding:11px 13px;border-radius:11px;background:#0A1120;border:1px solid #17233B">
+                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px">
+                    <span style="font-size:11px;color:#8FA3C0;font-weight:600">{{ s.label }}</span>
+                    <span style="font-size:14px;font-weight:800;font-family:'JetBrains Mono',monospace;color:{{ s.c }}">{{ s.n }}</span>
+                  </div>
+                  <div style="height:4px;border-radius:99px;background:#141F34;overflow:hidden"><div style="height:100%;width:{{ s.pct }}%;background:{{ s.c }}"></div></div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:12px;padding:13px 15px;border-radius:11px;background:rgba(94,231,216,.05);border:1px solid #1C3040;font-size:12.5px;line-height:1.6;color:#A8B9D2">{{ hotspotNote }}</div>
+          </div>
+
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px">
+            <div style="font-size:15.5px;font-weight:700;margin-bottom:2px">Priority tensions</div>
+            <div style="font-size:12px;color:#6E82A0;margin-bottom:16px">Ranked by severity. Select one to read the impact forecast.</div>
+            <div style="display:flex;flex-direction:column;gap:10px;max-height:640px;overflow-y:auto;padding-right:4px">
+              <sc-for list="{{ tensions }}" as="t" hint-placeholder-count="4">
+                <button onClick="{{ t.select }}" style="text-align:left;padding:15px 16px;border-radius:12px;border:1px solid {{ t.bd }};background:{{ t.bg }};cursor:pointer;color:#E9EEF7">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:7px">
+                    <div style="font-size:14px;font-weight:700;letter-spacing:-.2px">{{ t.title }}</div>
+                    <span style="font-size:9.5px;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:99px;background:{{ t.sevBg }};color:{{ t.sevFg }};white-space:nowrap">{{ t.sevLabel }}</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px">
+                    <div style="flex:1;height:5px;border-radius:99px;background:#141F34;overflow:hidden"><div style="height:100%;width:{{ t.strainPct }}%;background:{{ t.sevFg }}"></div></div>
+                    <span style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:{{ t.sevFg }}">{{ t.strain }} pts</span>
+                  </div>
+                  <div style="font-size:12.5px;line-height:1.6;color:#93A6C2">{{ t.description }}</div>
+                  <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#6E82A0;margin-top:8px">{{ t.timeframe }}</div>
+                </button>
+              </sc-for>
+              <sc-if value="{{ noTensions }}">
+                <div style="padding:24px;border-radius:12px;border:1px dashed #22314C;font-size:13px;color:#8496B2;line-height:1.6">No material tensions detected. Either the organisation is unusually coherent, or the scores are clustered — check the confidence ratings before celebrating.</div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr;gap:18px;margin-bottom:18px">
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px;max-width:560px">
+            <div style="font-size:15.5px;font-weight:700;margin-bottom:2px">Pair alignment matrix</div>
+            <div style="font-size:12px;color:#6E82A0;margin-bottom:16px">All 21 pairs. Darker red means the two elements are pulling against each other.</div>
+            <div style="display:grid;grid-template-columns:64px repeat(7,1fr);gap:3px">
+              <div></div>
+              <sc-for list="{{ matrix.heads }}" as="h" hint-placeholder-count="7">
+                <div style="font-size:9px;font-family:'JetBrains Mono',monospace;color:#7286A5;text-align:center;padding-bottom:4px">{{ h }}</div>
+              </sc-for>
+              <sc-for list="{{ matrix.rows }}" as="row" hint-placeholder-count="7">
+                <div style="display:grid;grid-template-columns:64px repeat(7,1fr);gap:3px;grid-column:span 8">
+                  <div style="font-size:9.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;display:flex;align-items:center;justify-content:flex-end;padding-right:6px">{{ row.head }}</div>
+                  <sc-for list="{{ row.cells }}" as="c" hint-placeholder-count="7">
+                    <div title="{{ c.title }}" style="aspect-ratio:1;border-radius:5px;background:{{ c.bg }};display:flex;align-items:center;justify-content:center;font-size:9.5px;font-family:'JetBrains Mono',monospace;color:{{ c.fg }}">{{ c.text }}</div>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:14px;align-items:center;margin-top:16px;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#6E82A0">
+              <span>ALIGNED</span>
+              <div style="flex:1;height:6px;border-radius:99px;background:linear-gradient(90deg,#1F6F63,#8C6B2E,#8C3A3A)"></div>
+              <span>STRAINED</span>
+            </div>
+          </div>
+
+        </div>
+
+        <sc-if value="{{ hasSelectedTension }}">
+          <div style="background:#0D1626;border:1px solid #2A2036;border-radius:16px;padding:24px;animation:rise .3s ease both">
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:18px">
+              <span style="width:8px;height:8px;border-radius:99px;background:#E88B6B"></span>
+              <div style="font-size:16.5px;font-weight:700">Impact forecast · {{ selTension.title }}</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px">
+              <div><div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:7px">SEVERITY</div><div style="font-size:15px;font-weight:700;color:{{ selTension.sevFg }}">{{ selTension.sevLabel }}</div><div style="font-size:12px;color:#8496B2;margin-top:5px">{{ selTension.urgency }}</div></div>
+              <div><div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:7px">TIME TO BITE</div><div style="font-size:15px;font-weight:700">{{ selTension.timeframe }}</div><div style="font-size:12px;color:#8496B2;margin-top:5px">If left unaddressed</div></div>
+              <div><div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:7px">STAKEHOLDERS</div><div style="display:flex;flex-wrap:wrap;gap:6px">
+                <sc-for list="{{ selTension.stakeholders }}" as="sh" hint-placeholder-count="3">
+                  <span style="font-size:11px;padding:3px 9px;border-radius:99px;border:1px solid #22314C;color:#A8B9D2">{{ sh }}</span>
+                </sc-for>
+              </div></div>
+            </div>
+            <div style="margin-top:20px;padding:16px;border-radius:12px;background:rgba(232,139,107,.06);border:1px solid #33262A">
+              <div style="font-size:12px;font-weight:700;color:#E8A98B;margin-bottom:6px">Projected consequence</div>
+              <div style="font-size:13.5px;line-height:1.65;color:#BCCADF">{{ selTension.impact }}</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;justify-content:flex-end;margin-top:24px">
+          <button onClick="{{ goSim }}" style="padding:13px 24px;border-radius:11px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:14.5px;font-weight:700;cursor:pointer">Continue to decision simulation &#8594;</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSim }}">
+      <div style="animation:rise .35s ease both">
+        <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:8px">PHASE 05</div>
+        <h2 style="font-size:34px;font-weight:800;letter-spacing:-1.1px;margin:0 0 10px">Decision simulation</h2>
+        <p style="font-size:15px;color:#8FA3C0;margin:0 0 24px;max-width:70ch">Buy interventions with the budget from your profile. Every intervention moves its primary element — and pushes or drags the others. Overload the organisation and change fatigue eats the gains.</p>
+
+        <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px 24px;margin-bottom:16px;display:grid;grid-template-columns:260px 1fr;gap:26px;align-items:start">
+          <label style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#5EE7D8;letter-spacing:.1em">SET YOUR BUDGET (USD)</span>
+            <div style="display:flex;align-items:center;gap:9px;padding:12px 14px;border-radius:11px;border:1px solid #2C5F63;background:#0A1120">
+              <span style="font-size:17px;font-weight:700;color:#6E82A0;font-family:'JetBrains Mono',monospace">$</span>
+              <input value="{{ sim.budgetValue }}" onChange="{{ sim.setBudget }}" inputmode="numeric" placeholder="900000" style="flex:1;min-width:0;border:none;background:transparent;color:#E9EEF7;font-size:19px;font-weight:700;font-family:'JetBrains Mono',monospace;outline:none" />
+            </div>
+            <sc-if value="{{ sim.hasSuggestion }}">
+              <button onClick="{{ sim.applySuggested }}" style="padding:8px 12px;border-radius:9px;border:1px solid #22314C;background:transparent;color:#8FA3C0;font-size:12px;font-weight:600;cursor:pointer;text-align:left">Use benchmark {{ sim.suggestedText }}</button>
+            </sc-if>
+          </label>
+          <div style="display:flex;flex-direction:column;gap:11px;padding-top:4px">
+            <div style="font-size:13.5px;line-height:1.65;color:#A8B9D2">{{ sim.suggestNote }}</div>
+            <div style="font-size:12.5px;line-height:1.6;color:#8496B2;padding:11px 14px;border-radius:10px;background:#0A1120;border:1px solid #17233B">{{ sim.scaleNote }} Interventions are also ranked against your own diagnosis — the widest gaps and most strained elements are marked <span style="color:#5FD6A4;font-weight:700">PRIORITY</span>.</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px">
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:14px;padding:18px">
+            <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:9px">BUDGET REMAINING</div>
+            <div style="font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:{{ sim.budgetFg }};line-height:1">{{ sim.remainingText }}</div>
+            <div style="height:5px;border-radius:99px;background:#141F34;margin-top:12px;overflow:hidden"><div style="height:100%;width:{{ sim.spentPct }}%;background:{{ sim.budgetFg }};transition:width .35s"></div></div>
+            <div style="font-size:11.5px;color:#8496B2;margin-top:8px">{{ sim.spentText }} committed of {{ sim.budgetText }}</div>
+          </div>
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:14px;padding:18px">
+            <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:9px">PROJECTED ALIGNMENT</div>
+            <div style="display:flex;align-items:baseline;gap:9px"><div style="font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#5EE7D8;line-height:1">{{ sim.projected }}</div><div style="font-size:13px;color:{{ sim.deltaFg }};font-family:'JetBrains Mono',monospace">{{ sim.deltaText }}</div></div>
+            <div style="font-size:11.5px;color:#8496B2;margin-top:12px">from {{ kpiOverall }} today</div>
+          </div>
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:14px;padding:18px">
+            <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:9px">CHANGE LOAD</div>
+            <div style="font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:{{ sim.loadFg }};line-height:1">{{ sim.load }}</div>
+            <div style="font-size:11.5px;color:#8496B2;margin-top:12px">{{ sim.loadNote }}</div>
+          </div>
+          <div style="background:#0D1626;border:1px solid #17233B;border-radius:14px;padding:18px">
+            <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:9px">HORIZON</div>
+            <div style="font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#C4A5FF;line-height:1">{{ sim.months }}</div>
+            <div style="font-size:11.5px;color:#8496B2;margin-top:12px">months to full effect</div>
+          </div>
+        </div>
+
+        <sc-if value="{{ sim.warn }}">
+          <div style="padding:15px 18px;border-radius:12px;background:rgba(232,139,107,.07);border:1px solid #33262A;font-size:13.5px;line-height:1.6;color:#E8B79B;margin-bottom:20px">{{ sim.warnText }}</div>
+        </sc-if>
+
+        <div style="display:grid;grid-template-columns:1fr 340px;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ interventions }}" as="iv" hint-placeholder-count="6">
+              <button onClick="{{ iv.toggle }}" style="text-align:left;padding:17px 19px;border-radius:14px;border:1px solid {{ iv.bd }};background:{{ iv.bg }};cursor:pointer;color:#E9EEF7;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;transition:border-color .16s">
+                <div>
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+                    <span style="width:16px;height:16px;flex:0 0 16px;border-radius:5px;border:1.5px solid {{ iv.boxBd }};background:{{ iv.boxBg }};display:flex;align-items:center;justify-content:center;font-size:10px;color:#04121A;font-weight:800">{{ iv.check }}</span>
+                    <span style="font-size:9.5px;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:5px;background:rgba(94,231,216,.09);color:#5EE7D8">{{ iv.primaryName }}</span>
+                    <span style="font-size:14.5px;font-weight:700;letter-spacing:-.2px">{{ iv.name }}</span>
+                  </div>
+                  <div style="font-size:12.5px;line-height:1.6;color:#93A6C2;padding-left:26px">{{ iv.effectText }}</div>
+                  <div style="font-size:11.5px;line-height:1.5;color:#6E82A0;padding-left:26px;margin-top:5px">{{ iv.why }}</div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-size:9.5px;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:99px;background:{{ iv.tierBg }};color:{{ iv.tierFg }};display:inline-block;margin-bottom:7px">{{ iv.tier }}</div>
+                  <div style="font-size:15px;font-weight:800;font-family:'JetBrains Mono',monospace;color:{{ iv.costFg }}">{{ iv.costText }}</div>
+                  <div style="font-size:11px;color:#6E82A0;font-family:'JetBrains Mono',monospace;margin-top:3px">{{ iv.months }} mo</div>
+                </div>
+              </button>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:20px;position:sticky;top:24px">
+              <div style="font-size:15px;font-weight:700;margin-bottom:3px">Cascade preview</div>
+              <div style="font-size:12px;color:#6E82A0;margin-bottom:16px">Where your portfolio lands each element.</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <sc-for list="{{ sim.projection }}" as="p" hint-placeholder-count="7">
+                  <div>
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+                      <span style="font-size:12.5px;font-weight:600">{{ p.name }}</span>
+                      <span style="font-family:'JetBrains Mono',monospace;font-size:12px"><span style="color:#6E82A0">{{ p.from }}</span> <span style="color:#4E5F7C">&#8594;</span> <span style="color:{{ p.toFg }}">{{ p.to }}</span></span>
+                    </div>
+                    <div style="position:relative;height:6px;border-radius:99px;background:#141F34;overflow:hidden">
+                      <div style="position:absolute;left:0;top:0;height:100%;width:{{ p.from }}%;background:#22415A"></div>
+                      <div style="position:absolute;left:0;top:0;height:100%;width:{{ p.to }}%;background:{{ p.barBg }};opacity:.9"></div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+              <button onClick="{{ clearSim }}" style="width:100%;margin-top:18px;padding:10px;border-radius:10px;border:1px solid #22314C;background:transparent;color:#8FA3C0;font-size:12.5px;font-weight:600;cursor:pointer">Clear portfolio</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;margin-top:24px">
+          <button onClick="{{ goPlan }}" style="padding:13px 24px;border-radius:11px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:14.5px;font-weight:700;cursor:pointer">Build the action plan &#8594;</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isPlan }}">
+      <div style="animation:rise .35s ease both">
+        <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:8px">PHASE 06</div>
+        <h2 style="font-size:34px;font-weight:800;letter-spacing:-1.1px;margin:0 0 10px">Action plan</h2>
+        <p style="font-size:15px;color:#8FA3C0;margin:0 0 24px;max-width:66ch">Seeded from your weakest elements and the interventions you bought. Assign an owner and a date, or a diagnosis is all it stays.</p>
+
+        <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:6px 6px 18px;overflow-x:auto">
+          <div style="display:grid;grid-template-columns:100px minmax(280px,1.6fr) 150px 130px 120px 40px;gap:10px;padding:16px 18px 12px;font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;min-width:900px">
+            <div>ELEMENT</div><div>ACTION</div><div>OWNER</div><div>DUE</div><div>STATUS</div><div></div>
+          </div>
+          <sc-for list="{{ actions }}" as="a" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:100px minmax(280px,1.6fr) 150px 130px 120px 40px;gap:10px;padding:11px 18px;border-top:1px solid #16223A;align-items:center;min-width:900px">
+              <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:#5EE7D8">{{ a.elementName }}</div>
+              <input value="{{ a.action }}" onChange="{{ a.setAction }}" placeholder="What will actually happen" style="padding:9px 11px;border-radius:9px;border:1px solid #1E2B45;background:#0A1120;color:#E9EEF7;font-size:13px;outline:none;width:100%" />
+              <input value="{{ a.owner }}" onChange="{{ a.setOwner }}" placeholder="Owner" style="padding:9px 11px;border-radius:9px;border:1px solid #1E2B45;background:#0A1120;color:#E9EEF7;font-size:13px;outline:none;width:100%" />
+              <input type="date" value="{{ a.due }}" onChange="{{ a.setDue }}" style="padding:9px 11px;border-radius:9px;border:1px solid #1E2B45;background:#0A1120;color:#E9EEF7;font-size:12.5px;outline:none;width:100%" />
+              <select value="{{ a.status }}" onChange="{{ a.setStatus }}" style="padding:9px 11px;border-radius:9px;border:1px solid #1E2B45;background:#0A1120;color:#E9EEF7;font-size:12.5px;outline:none;width:100%">
+                <option value="Not started">Not started</option>
+                <option value="In progress">In progress</option>
+                <option value="Blocked">Blocked</option>
+                <option value="Done">Done</option>
+              </select>
+              <button onClick="{{ a.remove }}" style="width:28px;height:28px;border-radius:8px;border:1px solid #1E2B45;background:transparent;color:#7286A5;cursor:pointer;font-size:14px;line-height:1">&#215;</button>
+            </div>
+          </sc-for>
+          <sc-if value="{{ noActions }}">
+            <div style="padding:34px 20px;text-align:center;border-top:1px solid #16223A;font-size:13.5px;line-height:1.6;color:#6E82A0">{{ emptyActionsNote }}</div>
+          </sc-if>
+          <div style="display:flex;gap:10px;padding:16px 18px 4px">
+            <button onClick="{{ addAction }}" style="padding:10px 16px;border-radius:10px;border:1px dashed #2A3A57;background:transparent;color:#8FA3C0;font-size:13px;font-weight:600;cursor:pointer">+ Add action</button>
+            <button onClick="{{ reseedActions }}" style="padding:10px 16px;border-radius:10px;border:1px solid #22314C;background:transparent;color:#8FA3C0;font-size:13px;font-weight:600;cursor:pointer">Re-seed from diagnosis</button>
+            <button onClick="{{ exportActionsCsv }}" style="padding:10px 16px;border-radius:10px;border:1px solid #22314C;background:transparent;color:#8FA3C0;font-size:13px;font-weight:600;cursor:pointer">Export plan (CSV)</button>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:24px;flex-wrap:wrap">
+          <div style="font-size:12.5px;color:#6E82A0">{{ saveNote }}</div>
+          <button onClick="{{ submitAssessment }}" style="padding:13px 24px;border-radius:11px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:14.5px;font-weight:700;cursor:pointer">Save complete submission</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAdmin }}">
+      <div style="animation:rise .35s ease both">
+        <sc-if value="{{ adminLocked }}">
+          <div style="max-width:400px;margin:70px auto;background:#0D1626;border:1px solid #17233B;border-radius:18px;padding:32px;text-align:center">
+            <div style="width:42px;height:42px;border-radius:12px;background:rgba(94,231,216,.09);border:1px solid #1E3040;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:16px">&#9679;</div>
+            <div style="font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:7px">Administrator console</div>
+            <div style="font-size:13px;color:#8496B2;line-height:1.6;margin-bottom:22px">Enter the administrator PIN to review stored responses and export data.</div>
+            <input type="password" value="{{ pinInput }}" onChange="{{ setPin }}" placeholder="PIN" style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid #22314C;background:#0A1120;color:#E9EEF7;font-size:14px;outline:none;text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:.2em" />
+            <button onClick="{{ tryUnlock }}" style="width:100%;margin-top:12px;padding:12px;border-radius:10px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:14px;font-weight:700;cursor:pointer">Unlock</button>
+            <div style="font-size:12px;color:#E8A98B;margin-top:12px;min-height:18px">{{ pinError }}</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ adminOpen }}">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:26px">
+              <div>
+                <div style="font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#7286A5;letter-spacing:.12em;margin-bottom:8px">ADMINISTRATOR</div>
+                <h2 style="font-size:34px;font-weight:800;letter-spacing:-1.1px;margin:0 0 8px">Response database</h2>
+                <p style="font-size:14.5px;color:#8FA3C0;margin:0">Stored in this browser. Export regularly — clearing site data deletes it.</p>
+              </div>
+              <div style="display:flex;gap:9px;flex-wrap:wrap">
+                <button onClick="{{ exportWideCsv }}" style="padding:11px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#5EE7D8,#38B0C4);color:#04121A;font-size:13px;font-weight:700;cursor:pointer">Export CSV · wide</button>
+                <button onClick="{{ exportLongCsv }}" style="padding:11px 16px;border-radius:10px;border:1px solid #22314C;background:transparent;color:#B9C8DE;font-size:13px;font-weight:600;cursor:pointer">Export CSV · long</button>
+                <button onClick="{{ exportAllActionsCsv }}" style="padding:11px 16px;border-radius:10px;border:1px solid #22314C;background:transparent;color:#B9C8DE;font-size:13px;font-weight:600;cursor:pointer">Export CSV · actions</button>
+                <label style="padding:11px 16px;border-radius:10px;border:1px solid #22314C;color:#B9C8DE;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center">Import JSON<input type="file" accept=".json" onChange="{{ importJson }}" style="display:none" /></label>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px">
+              <sc-for list="{{ adminKpis }}" as="k" hint-placeholder-count="4">
+                <div style="background:#0D1626;border:1px solid #17233B;border-radius:14px;padding:18px">
+                  <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;margin-bottom:9px">{{ k.label }}</div>
+                  <div style="font-size:28px;font-weight:800;font-family:'JetBrains Mono',monospace;color:{{ k.fg }};line-height:1">{{ k.value }}</div>
+                  <div style="font-size:11.5px;color:#8496B2;margin-top:7px">{{ k.note }}</div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;padding:22px;margin-bottom:18px">
+              <div style="font-size:15.5px;font-weight:700;margin-bottom:2px">Aggregate profile</div>
+              <div style="font-size:12px;color:#6E82A0;margin-bottom:18px">Mean current score per element across all stored responses, with spread between highest and lowest respondent.</div>
+              <sc-if value="{{ noRows }}">
+                <div style="padding:26px 20px;text-align:center;font-size:13px;color:#6E82A0;border:1px dashed #1E2B45;border-radius:12px">Aggregates appear once at least one response is stored.</div>
+              </sc-if>
+              <sc-if value="{{ hasAggregate }}">
+              <div style="display:flex;flex-direction:column;gap:13px">
+                <sc-for list="{{ aggregate }}" as="ag" hint-placeholder-count="7">
+                  <div>
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+                      <span style="font-size:13px;font-weight:600">{{ ag.name }}</span>
+                      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8FA3C0">mean {{ ag.mean }} · spread {{ ag.spread }}</span>
+                    </div>
+                    <div style="position:relative;height:8px;border-radius:99px;background:#141F34;overflow:hidden">
+                      <div style="position:absolute;left:{{ ag.min }}%;top:0;height:100%;width:{{ ag.range }}%;background:rgba(196,165,255,.22)"></div>
+                      <div style="position:absolute;left:{{ ag.mean }}%;top:-2px;width:2px;height:12px;background:#5EE7D8"></div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+              </sc-if>
+            </div>
+
+            <div style="background:#0D1626;border:1px solid #17233B;border-radius:16px;overflow-x:auto">
+              <div style="display:grid;grid-template-columns:100px 1.4fr 1.1fr 1fr 90px 90px 110px 40px;gap:10px;padding:16px 20px;font-size:10px;font-family:'JetBrains Mono',monospace;color:#6E82A0;letter-spacing:.1em;min-width:1000px">
+                <div>ID</div><div>ORGANISATION</div><div>RESPONDENT</div><div>ROLE / DEPT</div><div>ALIGN</div><div>GAP</div><div>SUBMITTED</div><div></div>
+              </div>
+              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="3">
+                <div style="display:grid;grid-template-columns:100px 1.4fr 1.1fr 1fr 90px 90px 110px 40px;gap:10px;padding:14px 20px;border-top:1px solid #16223A;align-items:center;font-size:13px;min-width:1000px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#5EE7D8">{{ r.id }}</div>
+                  <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600">{{ r.company }}</div>
+                  <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#A8B9D2">{{ r.respondent }}</div>
+                  <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#8496B2;font-size:12.5px">{{ r.role }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:{{ r.alignFg }}">{{ r.align }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;color:#C4A5FF">{{ r.gap }}</div>
+                  <div style="font-size:11.5px;color:#6E82A0;font-family:'JetBrains Mono',monospace">{{ r.date }}</div>
+                  <button onClick="{{ r.remove }}" style="width:28px;height:28px;border-radius:8px;border:1px solid #1E2B45;background:transparent;color:#7286A5;cursor:pointer;font-size:14px;line-height:1">&#215;</button>
+                </div>
+              </sc-for>
+              <sc-if value="{{ noRows }}">
+                <div style="padding:40px;text-align:center;font-size:13.5px;color:#6E82A0;border-top:1px solid #16223A">No responses stored yet. Completed assessments appear here.</div>
+              </sc-if>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap">
+              <div style="font-size:12.5px;color:#6E82A0">{{ adminNote }}</div>
+              <button onClick="{{ wipeAll }}" style="padding:11px 18px;border-radius:10px;border:1px solid #3A2630;background:transparent;color:#E08B8B;font-size:13px;font-weight:600;cursor:pointer">Delete all responses</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+  </main>
+</div>
+</sc-if>
+
+<sc-if value="{{ toast.on }}">
+  <div style="position:fixed;bottom:26px;left:50%;transform:translateX(-50%);padding:13px 22px;border-radius:12px;background:#0F1B2E;border:1px solid #25344F;box-shadow:0 20px 50px -18px rgba(0,0,0,.8);font-size:13.5px;font-weight:600;color:#E9EEF7;z-index:50;animation:rise .25s ease both">{{ toast.text }}</div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;username&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;kamran&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Access&quot;},&quot;password&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;kamran&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Access&quot;},&quot;adminPin&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;7SADMIN&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Access&quot;}}">
+const KEY = "sevensync.v2";
+
+const ELEMENTS = [
+  { k: "strategy", name: "Strategy", short: "Strategy", kind: "hard",
+    blurb: "How the organisation intends to build and defend advantage, and whether that intent is understood and funded.",
+    items: ["Strategic direction is clear, documented and current",
+            "Competitive positioning is genuinely distinctive",
+            "Strategy is understood at every level, not just the top",
+            "Budget and headcount follow the stated priorities"] },
+  { k: "structure", name: "Structure", short: "Structure", kind: "hard",
+    blurb: "How work, authority and accountability are divided — and whether the shape helps or fights the strategy.",
+    items: ["Reporting lines and accountabilities are unambiguous",
+            "Decision rights sit close to the information",
+            "Structure enables cross-functional work rather than blocking it",
+            "Layers and spans of control are appropriate to our size"] },
+  { k: "systems", name: "Systems", short: "Systems", kind: "hard",
+    blurb: "The processes, technology, data and performance machinery that carry daily work.",
+    items: ["Core processes are documented and actually followed",
+            "Technology supports the work rather than obstructing it",
+            "Data is available, trusted and used in decisions",
+            "Performance management and rewards drive the right behaviour"] },
+  { k: "sharedValues", name: "Shared Values", short: "Values", kind: "soft",
+    blurb: "The core beliefs at the centre of the model — what the organisation actually rewards when it costs something.",
+    items: ["Core values are explicit and widely known",
+            "Day-to-day behaviour matches the stated values",
+            "Leaders are held to the same standard as everyone else",
+            "Values genuinely guide difficult trade-offs"] },
+  { k: "style", name: "Style", short: "Style", kind: "soft",
+    blurb: "How leadership actually behaves — the signals people read to decide what matters here.",
+    items: ["Leadership behaviour is consistent and predictable",
+            "Decisions are made at the right speed and level",
+            "Dissent and bad news travel upward safely",
+            "Leaders visibly model the change they ask of others"] },
+  { k: "staff", name: "Staff", short: "Staff", kind: "soft",
+    blurb: "The people system: how many, in what roles, and whether they stay.",
+    items: ["We have the right number of people in the right roles",
+            "Recruitment attracts the calibre of talent we need",
+            "Engagement and retention are healthy",
+            "Succession and talent pipelines exist for critical roles"] },
+  { k: "skills", name: "Skills", short: "Skills", kind: "soft",
+    blurb: "Distinctive capability — what the organisation is measurably good at, versus what the strategy requires.",
+    items: ["Capabilities critical to the strategy are present in-house",
+            "Learning and development changes what people can do",
+            "Knowledge is shared rather than trapped in individuals",
+            "We can execute without heavy external dependency"] }
+];
+
+const EK = ELEMENTS.map(e => e.k);
+const ENAME = {}; ELEMENTS.forEach(e => { ENAME[e.k] = e.name; });
+
+const PAIR_COPY = {
+  "strategy|structure": { t: "Strategy–Structure misalignment", tf: "6–12 months",
+    hi: "Ambition outruns the shape of the organisation. Reporting lines and decision rights were built for the last strategy, so execution stalls in handoffs.",
+    lo: "The structure is more developed than the strategy it serves. Capable units are optimising locally because no clear direction tells them what to trade off.",
+    im: "Execution delays, duplicated effort between units, resource allocation drifting toward whoever argues hardest.",
+    sh: ["Executive team", "Department heads", "Investors"] },
+  "strategy|skills": { t: "Strategy–Skills disconnect", tf: "12–24 months",
+    hi: "The strategy requires capabilities the organisation does not yet have. Ambition is being underwritten by hope and contractors.",
+    lo: "Capability exceeds what the strategy asks of it. Strong people are under-deployed and will leave for somewhere more demanding.",
+    im: "Initiatives stalling at implementation, escalating consultancy spend, attrition among your strongest performers.",
+    sh: ["Business units", "HR", "Learning & development"] },
+  "strategy|systems": { t: "Strategy–Systems gap", tf: "Immediate to 6 months",
+    hi: "Strategic intent is ahead of the infrastructure meant to deliver it. Manual workarounds are quietly becoming the operating model.",
+    lo: "Systems capability is under-exploited because no strategic question is being asked of the data.",
+    im: "Data blind spots in decisions, slow time-to-market, cost of workarounds hidden in payroll.",
+    sh: ["Operations", "IT", "Data teams"] },
+  "structure|staff": { t: "Structure–Staff strain", tf: "6–18 months",
+    hi: "The structure is imposing load the workforce cannot absorb. Roles have outgrown the people in them.",
+    lo: "People capacity is available but the structure gives it nowhere useful to go.",
+    im: "Rising turnover in the middle layer, burnout in key roles, loss of institutional memory.",
+    sh: ["Employees", "People managers", "HR"] },
+  "structure|sharedValues": { t: "Values–Structure contradiction", tf: "12–24 months",
+    hi: "Stated values are contradicted by how the organisation is arranged — collaboration is preached while incentives and boundaries reward the opposite.",
+    lo: "Structure is sound but there is no shared belief holding it together, so coordination depends entirely on process.",
+    im: "Inconsistent customer experience, cynicism about leadership language, ethical and compliance exposure.",
+    sh: ["All employees", "Customers", "Compliance"] },
+  "systems|skills": { t: "Systems–Skills adoption risk", tf: "3–12 months",
+    hi: "Investment in systems is running ahead of the ability to use them. Licences are bought; behaviour is unchanged.",
+    lo: "Capable people are constrained by inadequate tooling, and are inventing shadow systems to compensate.",
+    im: "Technology spend without benefit realisation, shadow IT, credibility damage to the next change programme.",
+    sh: ["End users", "IT", "Finance"] },
+  "style|systems": { t: "Style–Systems conflict", tf: "6–12 months",
+    hi: "Leadership operates faster and more informally than the systems allow, so controls are routinely bypassed.",
+    lo: "Systems demand a discipline that leadership behaviour does not model, so compliance is theatre.",
+    im: "Decision bottlenecks, control failures, formal process running parallel to how work really happens.",
+    sh: ["Executive team", "Middle management", "Risk & audit"] },
+  "style|staff": { t: "Style–Staff trust deficit", tf: "3–12 months",
+    hi: "Leadership style is asking more of people than the current workforce can safely give.",
+    lo: "Leadership is not engaging the capacity that exists; people are waiting to be asked.",
+    im: "Disengagement, silence in meetings that turns into surprises later, regretted attrition.",
+    sh: ["Employees", "People managers", "Works council"] },
+  "sharedValues|style": { t: "Values–Style credibility gap", tf: "Immediate to 9 months",
+    hi: "The organisation believes in something its leaders do not visibly practise. This is the fastest route to cynicism.",
+    lo: "Leaders behave well but no articulated values generalise it beyond their personal presence.",
+    im: "Change fatigue, discounting of leadership communication, values-based recruitment promises breaking on arrival.",
+    sh: ["All employees", "Communications", "Executive team"] },
+  "staff|skills": { t: "Staff–Skills mismatch", tf: "9–18 months",
+    hi: "Headcount is adequate but capability is not; the organisation is fully staffed and still unable to deliver.",
+    lo: "Skilled people are too few to cover the work, concentrating risk in a handful of individuals.",
+    im: "Key-person dependency, delivery risk on critical initiatives, quality variance.",
+    sh: ["Business units", "HR", "Delivery leads"] }
+};
+
+const INTERVENTIONS = [
+  { id: "i1", name: "Strategy refresh cascaded to team objectives", primary: "strategy", cost: 120000, months: 4,
+    eff: { strategy: 18, systems: 5, style: 4 } },
+  { id: "i2", name: "Decision-rights redesign and delayering", primary: "structure", cost: 180000, months: 6,
+    eff: { structure: 20, style: 6, systems: 3, staff: -3 } },
+  { id: "i3", name: "Core platform modernisation", primary: "systems", cost: 450000, months: 12,
+    eff: { systems: 22, structure: 3, skills: -4, staff: -3 } },
+  { id: "i4", name: "Data and analytics foundation", primary: "systems", cost: 260000, months: 9,
+    eff: { systems: 14, strategy: 6, skills: 3 } },
+  { id: "i5", name: "Values relaunch with leader storytelling", primary: "sharedValues", cost: 90000, months: 5,
+    eff: { sharedValues: 16, style: 7, staff: 4 } },
+  { id: "i6", name: "Leadership development programme", primary: "style", cost: 220000, months: 9,
+    eff: { style: 18, staff: 6, skills: 5 } },
+  { id: "i7", name: "Capability academy and reskilling", primary: "skills", cost: 300000, months: 12,
+    eff: { skills: 20, staff: 7, systems: 4 } },
+  { id: "i8", name: "Talent acquisition and employer brand push", primary: "staff", cost: 200000, months: 8,
+    eff: { staff: 18, skills: 6 } },
+  { id: "i9", name: "Performance and reward redesign", primary: "systems", cost: 160000, months: 7,
+    eff: { systems: 10, staff: 10, style: 5, sharedValues: 4 } },
+  { id: "i10", name: "Middle-manager communication cadence", primary: "style", cost: 60000, months: 3,
+    eff: { style: 9, sharedValues: 8, strategy: 5 } },
+  { id: "i11", name: "Process simplification sprint", primary: "systems", cost: 140000, months: 5,
+    eff: { systems: 12, structure: 6, staff: 4 } },
+  { id: "i12", name: "Retention and wellbeing intervention", primary: "staff", cost: 130000, months: 6,
+    eff: { staff: 14, sharedValues: 6, style: 3 } }
+];
+
+const BAND = v => v <= 2 ? "absent" : v <= 4 ? "emerging" : v <= 6 ? "developing" : v <= 8 ? "established" : "leading";
+const CONF = ["", "guesswork", "low", "moderate", "good", "evidence-based"];
+
+const PROFILE_BLANK = {
+  respondentName: "", respondentRole: "", respondentDept: "", respondentEmail: "",
+  company: "", industry: "", headquarters: "", years: "", model: "",
+  employees: "", revenue: "", growth: "", marketPos: "",
+  mission: "", vision: "", priorities: "", challenge: "",
+  budget: "1000000", finHealth: ""
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const saved = this.load();
+    this.state = {
+      authed: !!saved.authed,
+      loginUser: "", loginPass: "", loginError: "",
+      screen: "home",
+      activeS: "strategy",
+      profile: Object.assign({}, PROFILE_BLANK, saved.profile || {}),
+      answers: saved.answers || {},
+      evidence: saved.evidence || {},
+      confidence: saved.confidence || {},
+      touched: saved.touched || {},
+      selected: saved.selected || [],
+      actions: saved.actions || [],
+      responses: saved.responses || [],
+      seq: saved.seq || 0,
+      adminUnlocked: false,
+      pinInput: "",
+      pinError: "",
+      selTension: null,
+      toast: "",
+      adminNote: ""
+    };
+    this._toastTimer = null;
+  }
+
+  load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { return {}; }
+  }
+  persist(extra) {
+    const s = Object.assign({}, this.state, extra || {});
+    const payload = {
+      authed: s.authed,
+      profile: s.profile, answers: s.answers, evidence: s.evidence, confidence: s.confidence,
+      touched: s.touched, selected: s.selected, actions: s.actions, responses: s.responses, seq: s.seq
+    };
+    try { localStorage.setItem(KEY, JSON.stringify(payload)); } catch (e) {}
+  }
+  componentDidUpdate() { this.persist(); }
+
+  flash(text) {
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+    this.setState({ toast: text });
+    this._toastTimer = setTimeout(() => this.setState({ toast: "" }), 2600);
+  }
+
+  // ---------- scoring ----------
+  val(k, i, which) {
+    const a = this.state.answers[k + "." + i];
+    if (a && typeof a[which] === "number") return a[which];
+    return which === "cur" ? 5 : 8;
+  }
+  set(k, i, which, v) {
+    const answers = Object.assign({}, this.state.answers);
+    const cur = Object.assign({ cur: this.val(k, i, "cur"), des: this.val(k, i, "des") }, answers[k + "." + i]);
+    cur[which] = v;
+    answers[k + "." + i] = cur;
+    const touched = Object.assign({}, this.state.touched); touched[k] = true;
+    this.setState({ answers: answers, touched: touched });
+  }
+  score(k, which) {
+    let sum = 0;
+    for (let i = 0; i < 4; i++) sum += this.val(k, i, which);
+    return Math.round((sum / 4) * 10);
+  }
+  allScores(which) { const o = {}; EK.forEach(k => { o[k] = this.score(k, which); }); return o; }
+  overall(which) {
+    const s = this.allScores(which);
+    return Math.round(EK.reduce((a, k) => a + s[k], 0) / 7);
+  }
+
+  tensionList() {
+    const cur = this.allScores("cur");
+    const list = [];
+    Object.keys(PAIR_COPY).forEach(key => {
+      const parts = key.split("|");
+      const a = parts[0], b = parts[1];
+      const diff = cur[a] - cur[b];
+      const strain = Math.abs(diff);
+      const bothLow = cur[a] < 55 && cur[b] < 55;
+      if (strain < 15 && !bothLow) return;
+      const c = PAIR_COPY[key];
+      const sev = strain >= 30 ? "critical" : strain >= 20 || bothLow ? "high" : "moderate";
+      list.push({
+        id: key, title: c.t, timeframe: c.tf, strain: strain,
+        description: bothLow && strain < 15
+          ? "Both elements score low. They are not in conflict — they are jointly weak, which compounds every other tension in the system."
+          : (diff > 0 ? c.hi : c.lo),
+        impact: c.im, stakeholders: c.sh, severity: sev, pair: [a, b]
+      });
+    });
+    const order = { critical: 0, high: 1, moderate: 2 };
+    return list.sort((x, y) => order[x.severity] - order[y.severity] || y.strain - x.strain);
+  }
+
+  projection() {
+    const cur = this.allScores("cur");
+    const sel = INTERVENTIONS.filter(i => this.state.selected.indexOf(i.id) >= 0);
+    const out = {}; EK.forEach(k => { out[k] = cur[k]; });
+    sel.forEach(iv => {
+      Object.keys(iv.eff).forEach(k => {
+        const delta = iv.eff[k];
+        if (delta > 0) {
+          const head = 100 - out[k];
+          out[k] = out[k] + delta * (head / 100) * 1.35;
+        } else out[k] = out[k] + delta;
+      });
+    });
+    const fatigue = Math.max(0, sel.length - 4);
+    if (fatigue) { out.staff -= fatigue * 5; out.style -= fatigue * 4; out.sharedValues -= fatigue * 3; }
+    EK.forEach(k => { out[k] = Math.max(0, Math.min(100, Math.round(out[k]))); });
+    return { cur: cur, next: out, sel: sel, fatigue: fatigue };
+  }
+
+  money(n) {
+    const v = Number(n) || 0;
+    if (v >= 1000000) return "$" + (v / 1000000).toFixed(v % 1000000 === 0 ? 0 : 1) + "M";
+    if (v >= 1000) return "$" + Math.round(v / 1000) + "k";
+    return "$" + v;
+  }
+
+  // ---------- csv ----------
+  q(v) {
+    const s = v === null || v === undefined ? "" : String(v);
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  download(name, text, type) {
+    const blob = new Blob([text], { type: (type || "text/csv") + ";charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+  snapshot() {
+    const cur = this.allScores("cur"), des = this.allScores("des");
+    return {
+      id: "RSP-" + String(this.state.seq + 1).padStart(4, "0"),
+      submittedAt: new Date().toISOString(),
+      profile: Object.assign({}, this.state.profile),
+      answers: Object.assign({}, this.state.answers),
+      evidence: Object.assign({}, this.state.evidence),
+      confidence: Object.assign({}, this.state.confidence),
+      scoresCur: cur, scoresDes: des,
+      overallCur: this.overall("cur"), overallDes: this.overall("des"),
+      selected: this.state.selected.slice(),
+      actions: this.state.actions.map(a => Object.assign({}, a)),
+      tensions: this.tensionList().map(t => t.title)
+    };
+  }
+  wideRows(records) {
+    const head = ["response_id", "submitted_at", "respondent_name", "role", "department", "email",
+      "organisation", "industry", "headquarters", "years_in_operation", "business_model",
+      "employees", "annual_revenue", "revenue_growth", "market_position", "financial_health",
+      "improvement_budget_usd", "mission", "vision", "strategic_priorities", "major_challenge",
+      "overall_current", "overall_desired", "overall_gap"];
+    EK.forEach(k => head.push(k + "_current", k + "_desired", k + "_gap", k + "_confidence", k + "_evidence"));
+    ELEMENTS.forEach(e => e.items.forEach((t, i) => head.push(e.k + "_q" + (i + 1) + "_current", e.k + "_q" + (i + 1) + "_desired")));
+    head.push("interventions_selected", "tensions_detected", "action_count");
+    const lines = [head.map(this.q, this).join(",")];
+    records.forEach(r => {
+      const p = r.profile || {};
+      const row = [r.id, r.submittedAt, p.respondentName, p.respondentRole, p.respondentDept, p.respondentEmail,
+        p.company, p.industry, p.headquarters, p.years, p.model, p.employees, p.revenue, p.growth,
+        p.marketPos, p.finHealth, p.budget, p.mission, p.vision, p.priorities, p.challenge,
+        r.overallCur, r.overallDes, r.overallDes - r.overallCur];
+      EK.forEach(k => row.push(r.scoresCur[k], r.scoresDes[k], r.scoresDes[k] - r.scoresCur[k],
+        (r.confidence || {})[k] || "", (r.evidence || {})[k] || ""));
+      ELEMENTS.forEach(e => e.items.forEach((t, i) => {
+        const a = (r.answers || {})[e.k + "." + i] || {};
+        row.push(typeof a.cur === "number" ? a.cur : 5, typeof a.des === "number" ? a.des : 8);
+      }));
+      row.push((r.selected || []).map(id => (INTERVENTIONS.find(x => x.id === id) || {}).name).join(" | "),
+        (r.tensions || []).join(" | "), (r.actions || []).length);
+      lines.push(row.map(this.q, this).join(","));
+    });
+    return lines.join("\n");
+  }
+  longRows(records) {
+    const lines = [["response_id", "submitted_at", "organisation", "respondent_name", "role", "department",
+      "element", "element_type", "item_no", "item_text", "current", "desired", "gap",
+      "element_confidence", "element_evidence"].join(",")];
+    records.forEach(r => {
+      ELEMENTS.forEach(e => e.items.forEach((t, i) => {
+        const a = (r.answers || {})[e.k + "." + i] || {};
+        const c = typeof a.cur === "number" ? a.cur : 5, d = typeof a.des === "number" ? a.des : 8;
+        lines.push([r.id, r.submittedAt, (r.profile || {}).company, (r.profile || {}).respondentName,
+          (r.profile || {}).respondentRole, (r.profile || {}).respondentDept, e.name, e.kind, i + 1, t,
+          c, d, d - c, (r.confidence || {})[e.k] || "", (r.evidence || {})[e.k] || ""]
+          .map(this.q, this).join(","));
+      }));
+    });
+    return lines.join("\n");
+  }
+  actionRows(records) {
+    const lines = [["response_id", "organisation", "element", "action", "owner", "due_date", "status"].join(",")];
+    records.forEach(r => (r.actions || []).forEach(a => {
+      lines.push([r.id, (r.profile || {}).company, ENAME[a.element] || a.element, a.action, a.owner, a.due, a.status]
+        .map(this.q, this).join(","));
+    }));
+    return lines.join("\n");
+  }
+
+  seedActions() {
+    const cur = this.allScores("cur"), des = this.allScores("des");
+    const ranked = EK.slice().sort((a, b) => (des[b] - cur[b]) - (des[a] - cur[a])).slice(0, 3);
+    const rows = ranked.map((k, n) => ({
+      uid: "a" + Date.now() + n, element: k,
+      action: "Close the " + (des[k] - cur[k]) + "-point gap in " + ENAME[k].toLowerCase(),
+      owner: "", due: "", status: "Not started"
+    }));
+    this.state.selected.forEach((id, n) => {
+      const iv = INTERVENTIONS.find(x => x.id === id);
+      if (iv) rows.push({ uid: "b" + Date.now() + n, element: iv.primary, action: iv.name, owner: "", due: "", status: "Not started" });
+    });
+    return rows;
+  }
+
+  demo() {
+    const answers = {};
+    const pattern = { strategy: [8, 7, 5, 6], structure: [4, 3, 4, 5], systems: [5, 4, 3, 5],
+      sharedValues: [7, 5, 4, 5], style: [6, 4, 3, 4], staff: [5, 6, 4, 3], skills: [4, 4, 3, 4] };
+    const target = { strategy: [9, 9, 8, 8], structure: [8, 8, 8, 7], systems: [9, 9, 8, 8],
+      sharedValues: [9, 8, 8, 8], style: [8, 8, 8, 8], staff: [8, 8, 8, 7], skills: [9, 8, 8, 8] };
+    EK.forEach(k => pattern[k].forEach((v, i) => { answers[k + "." + i] = { cur: v, des: target[k][i] }; }));
+    return {
+      profile: Object.assign({}, PROFILE_BLANK, {
+        respondentName: "A. Rahman", respondentRole: "Chief Operating Officer", respondentDept: "Operations",
+        company: "Meridian Logistics", industry: "manufacturing", headquarters: "Karachi, Pakistan",
+        years: "18", model: "b2b", employees: "1400", revenue: "96000000", growth: "moderate",
+        marketPos: "challenger", finHealth: "moderate", budget: "900000",
+        mission: "Move freight across South Asia with certainty.",
+        vision: "The region's most trusted logistics operator by 2030.",
+        priorities: "Digitise the network\nEnter two new corridors\nLift on-time delivery to 96%",
+        challenge: "A digital transformation programme in year two that has not changed operating performance."
+      }),
+      answers: answers,
+      evidence: { structure: "Three reorganisations in four years; nobody can name their approver for spend above $50k.",
+        systems: "Two TMS instances that do not reconcile; the ops team keeps a parallel spreadsheet." },
+      confidence: { strategy: 4, structure: 5, systems: 4, sharedValues: 3, style: 3, staff: 4, skills: 3 },
+      touched: { strategy: true, structure: true, systems: true, sharedValues: true, style: true, staff: true, skills: true }
+    };
+  }
+
+  // Cost of an intervention scales with headcount and financial pressure — taken from the profile stage.
+  sizeFactor() {
+    const n = Number(this.state.profile.employees) || 250;
+    if (n <= 50) return 0.45;
+    if (n <= 250) return 0.7;
+    if (n <= 1000) return 1;
+    if (n <= 5000) return 1.5;
+    return 2.2;
+  }
+  costOf(iv) {
+    const fin = this.state.profile.finHealth;
+    const risk = fin === "constrained" ? 1.15 : fin === "healthy" ? 0.95 : 1;
+    return Math.round(iv.cost * this.sizeFactor() * risk / 5000) * 5000;
+  }
+  suggestedBudget() {
+    const rev = Number(this.state.profile.revenue) || 0;
+    if (!rev) return 0;
+    const fin = this.state.profile.finHealth;
+    const pct = fin === "healthy" ? 0.015 : fin === "constrained" ? 0.005 : 0.01;
+    return Math.round(rev * pct / 10000) * 10000;
+  }
+
+  buildReport() {
+    const st = this.state, p = st.profile;
+    const cur = this.allScores("cur"), des = this.allScores("des");
+    const oCur = this.overall("cur"), oDes = this.overall("des");
+    const tens = this.tensionList();
+    const proj = this.projection();
+    const pOverall = Math.round(EK.reduce((a, k) => a + proj.next[k], 0) / 7);
+    const esc = s => String(s === null || s === undefined ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const rows = ELEMENTS.map(e =>
+      "<tr><td><b>" + e.name + "</b><div class='mut'>" + e.kind + "</div></td><td class='n'>" + cur[e.k] +
+      "</td><td class='n'>" + des[e.k] + "</td><td class='n'>" + (des[e.k] - cur[e.k]) +
+      "</td><td class='n'>" + (st.confidence[e.k] || 3) + "/5</td><td>" + esc(st.evidence[e.k] || "\u2014") + "</td></tr>").join("");
+    const tenRows = tens.length ? tens.map(t =>
+      "<tr><td><b>" + esc(t.title) + "</b><div class='mut'>" + esc(t.description) + "</div></td><td class='n'>" + t.strain +
+      "</td><td>" + t.severity + "</td><td>" + esc(t.timeframe) + "</td></tr>").join("")
+      : "<tr><td colspan='4'>No material tensions detected.</td></tr>";
+    const ivRows = proj.sel.length ? proj.sel.map(iv =>
+      "<tr><td>" + esc(iv.name) + "</td><td>" + ENAME[iv.primary] + "</td><td class='n'>" + this.money(this.costOf(iv)) +
+      "</td><td class='n'>" + iv.months + " mo</td></tr>").join("")
+      : "<tr><td colspan='4'>No interventions selected.</td></tr>";
+    const projRows = ELEMENTS.map(e =>
+      "<tr><td>" + e.name + "</td><td class='n'>" + cur[e.k] + "</td><td class='n'>" + proj.next[e.k] +
+      "</td><td class='n'>" + (proj.next[e.k] - cur[e.k] > 0 ? "+" : "") + (proj.next[e.k] - cur[e.k]) + "</td></tr>").join("");
+    const actRows = st.actions.length ? st.actions.map(a =>
+      "<tr><td>" + (ENAME[a.element] || "General") + "</td><td>" + esc(a.action) + "</td><td>" + esc(a.owner || "\u2014") +
+      "</td><td>" + esc(a.due || "\u2014") + "</td><td>" + esc(a.status) + "</td></tr>").join("")
+      : "<tr><td colspan='5'>No actions recorded.</td></tr>";
+    const spent = proj.sel.reduce((a, i) => a + this.costOf(i), 0);
+
+    return "<!doctype html><html><head><meta charset='utf-8'/><title>7S Report \u2014 " + esc(p.company || "Organisation") +
+      "</title><style>" +
+      "@page{margin:16mm}" +
+      "body{font-family:Georgia,'Times New Roman',serif;color:#16202E;margin:0;padding:38px;line-height:1.55;background:#fff}" +
+      ".wrap{max-width:940px;margin:0 auto}" +
+      "h1{font-size:30px;margin:0 0 6px;letter-spacing:-.5px}h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:2px solid #16202E}" +
+      ".sub{color:#5C6B80;font-size:14px;margin:0 0 4px}" +
+      ".kpis{display:flex;gap:14px;margin:22px 0 6px;flex-wrap:wrap}" +
+      ".kpi{flex:1;min-width:150px;border:1px solid #D5DCE5;border-radius:8px;padding:14px}" +
+      ".kpi .l{font-size:10px;letter-spacing:.1em;color:#5C6B80;font-family:Arial,sans-serif}" +
+      ".kpi .v{font-size:28px;font-weight:700;margin-top:4px;font-family:Arial,sans-serif}" +
+      "table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}" +
+      "th{text-align:left;font-family:Arial,sans-serif;font-size:10px;letter-spacing:.08em;color:#5C6B80;border-bottom:1px solid #C9D2DD;padding:7px 8px;text-transform:uppercase}" +
+      "td{padding:9px 8px;border-bottom:1px solid #E7ECF2;vertical-align:top}" +
+      "td.n{text-align:right;font-family:Arial,sans-serif;font-variant-numeric:tabular-nums}" +
+      ".mut{color:#68778C;font-size:12px;margin-top:2px}" +
+      "p{font-size:14px}ul{font-size:14px;padding-left:20px}" +
+      ".foot{margin-top:40px;padding-top:14px;border-top:1px solid #D5DCE5;font-size:12px;color:#5C6B80}" +
+      "@media print{body{padding:0}h2{page-break-after:avoid}tr{page-break-inside:avoid}}" +
+      "</style></head><body><div class='wrap'>" +
+      "<h1>McKinsey 7S Alignment Report</h1>" +
+      "<p class='sub'>" + esc(p.company || "Unnamed organisation") + (p.industry ? " \u00B7 " + esc(p.industry) : "") + (p.headquarters ? " \u00B7 " + esc(p.headquarters) : "") + "</p>" +
+      "<p class='sub'>Respondent: " + esc(p.respondentName || "Anonymous") + (p.respondentRole ? ", " + esc(p.respondentRole) : "") + " \u00B7 " + new Date().toLocaleDateString() + "</p>" +
+      "<div class='kpis'>" +
+      "<div class='kpi'><div class='l'>CURRENT ALIGNMENT</div><div class='v'>" + oCur + "</div></div>" +
+      "<div class='kpi'><div class='l'>TARGET ALIGNMENT</div><div class='v'>" + oDes + "</div></div>" +
+      "<div class='kpi'><div class='l'>GAP</div><div class='v'>" + (oDes - oCur) + "</div></div>" +
+      "<div class='kpi'><div class='l'>TENSIONS</div><div class='v'>" + tens.length + "</div></div></div>" +
+      "<h2>1. Context</h2><p><b>Mission.</b> " + esc(p.mission || "Not stated") + "</p><p><b>Vision.</b> " + esc(p.vision || "Not stated") +
+      "</p><p><b>Strategic priorities.</b> " + esc(p.priorities || "Not stated") + "</p><p><b>Major challenge.</b> " + esc(p.challenge || "Not stated") + "</p>" +
+      "<h2>2. Element scores</h2><table><tr><th>Element</th><th>Current</th><th>Desired</th><th>Gap</th><th>Conf.</th><th>Evidence</th></tr>" + rows + "</table>" +
+      "<h2>3. Tension diagnosis</h2><table><tr><th>Tension</th><th>Strain</th><th>Severity</th><th>Horizon</th></tr>" + tenRows + "</table>" +
+      "<h2>4. Intervention portfolio</h2><p>Budget " + this.money(Number(p.budget) || 0) + " \u00B7 committed " + this.money(spent) +
+      " \u00B7 projected alignment " + pOverall + " (" + (pOverall - oCur >= 0 ? "+" : "") + (pOverall - oCur) + ")</p>" +
+      "<table><tr><th>Intervention</th><th>Primary element</th><th>Cost</th><th>Lead time</th></tr>" + ivRows + "</table>" +
+      "<h2>5. Projected effect</h2><table><tr><th>Element</th><th>Now</th><th>Projected</th><th>Change</th></tr>" + projRows + "</table>" +
+      "<h2>6. Action plan</h2><table><tr><th>Element</th><th>Action</th><th>Owner</th><th>Due</th><th>Status</th></tr>" + actRows + "</table>" +
+      "<div class='foot'>McKinsey 7S Framework \u00B7 SevenSync Alignment Studio<br/>Designed by Dr. Kamran Hameed</div>" +
+      "</div></body></html>";
+  }
+  printReport() {
+    const w = window.open("", "_blank");
+    if (!w) { this.flash("Allow pop-ups to print the report."); return; }
+    w.document.open(); w.document.write(this.buildReport()); w.document.close();
+    setTimeout(() => { try { w.focus(); w.print(); } catch (e) {} }, 400);
+  }
+
+  renderVals() {
+    const st = this.state;
+    const screen = st.screen;
+    const cur = this.allScores("cur"), des = this.allScores("des");
+    const oCur = this.overall("cur"), oDes = this.overall("des");
+    const enterPlan = () => this.setState({
+      screen: "plan", selTension: null,
+      actions: st.actions.length || !Object.keys(st.touched).length ? st.actions : this.seedActions()
+    });
+    const go = s => s === "plan" ? enterPlan : () => this.setState({ screen: s, selTension: null });
+    const tone = v => v >= 75 ? "#5FD6A4" : v >= 55 ? "#E3C167" : "#E88B6B";
+
+    // nav
+    const navDef = [
+      { id: "home", label: "Overview" }, { id: "profile", label: "Organisation profile" },
+      { id: "assessment", label: "7S assessment" }, { id: "results", label: "Alignment dashboard" },
+      { id: "tensions", label: "Tension diagnosis" }, { id: "sim", label: "Decision simulation" },
+      { id: "plan", label: "Action plan" }, { id: "admin", label: "Administrator" }
+    ];
+    const done = { profile: !!st.profile.company, assessment: Object.keys(st.touched).length === 7,
+      results: Object.keys(st.touched).length > 0, tensions: Object.keys(st.touched).length > 0,
+      sim: st.selected.length > 0, plan: st.actions.length > 0, home: true, admin: false };
+    const nav = navDef.map((n, i) => {
+      const active = screen === n.id;
+      return { n: i === 7 ? "\u2699" : String(i), label: n.label, go: go(n.id),
+        bg: active ? "rgba(94,231,216,.09)" : "transparent",
+        bd: active ? "#1E3A44" : "transparent",
+        fg: active ? "#E9EEF7" : "#8FA3C0", fw: active ? "700" : "500",
+        badgeBg: active ? "#5EE7D8" : "#16223A", badgeFg: active ? "#04121A" : "#7286A5",
+        tick: done[n.id] ? "\u25CF" : "", tickFg: "#5FD6A4" };
+    });
+
+    const touchedCount = Object.keys(st.touched).length;
+    const progress = { pct: Math.round(touchedCount / 7 * 100),
+      label: touchedCount === 7 ? "All seven elements scored" : touchedCount + " of 7 elements scored" };
+
+    // ring diagram
+    const ringOrder = ["strategy", "structure", "systems", "skills", "staff", "style"];
+    const ringNodes = ringOrder.map((k, i) => {
+      const ang = (-90 + i * 60) * Math.PI / 180;
+      const e = ELEMENTS.find(x => x.k === k);
+      return { x: Math.round(50 + Math.cos(ang) * 38), y: Math.round(48 + Math.sin(ang) * 40),
+        short: e.short, kind: e.kind, size: 62,
+        bg: e.kind === "hard" ? "rgba(94,231,216,.08)" : "rgba(196,165,255,.08)",
+        bd: e.kind === "hard" ? "#255B60" : "#3B3358",
+        fg: e.kind === "hard" ? "#8FF0E4" : "#D3BCFF" };
+    });
+    ringNodes.push({ x: 50, y: 48, short: "Shared Values", kind: "core", size: 80,
+      bg: "rgba(94,231,216,.14)", bd: "#3D7C7A", fg: "#DFFAF6" });
+
+    const homeFeatures = [
+      { n: "01", title: "Current versus desired, item by item", body: "Twenty-eight anchored statements scored twice. The gap is the diagnosis, not the raw score.", tint: "rgba(94,231,216,.1)", ink: "#5EE7D8" },
+      { n: "02", title: "Every pair tested for strain", body: "All 21 element pairs are checked, then ranked into a prioritised tension list with impact forecasts.", tint: "rgba(196,165,255,.1)", ink: "#C4A5FF" },
+      { n: "03", title: "Spend a real budget", body: "Twelve interventions with costs, lead times, cascade effects and a change-fatigue penalty for overreach.", tint: "rgba(232,193,103,.1)", ink: "#E3C167" },
+      { n: "04", title: "Everything exports", body: "Responses persist locally and the administrator can download them as wide or long-format CSV for analysis.", tint: "rgba(95,214,164,.1)", ink: "#5FD6A4" }
+    ];
+
+    // profile form
+    const pf = (key, label, ph, span) => ({ label: label, ph: ph || "", span: span || 1, isText: true, isSelect: false, isArea: false,
+      value: st.profile[key] || "",
+      set: e => { const p = Object.assign({}, st.profile); p[key] = e.target.value; this.setState({ profile: p }); } });
+    const ps = (key, label, opts) => ({ label: label, span: 1, isSelect: true, isText: false, isArea: false,
+      value: st.profile[key] || "", options: [{ v: "", t: "Select\u2026" }].concat(opts),
+      set: e => { const p = Object.assign({}, st.profile); p[key] = e.target.value; this.setState({ profile: p }); } });
+    const pa = (key, label, ph) => ({ label: label, ph: ph || "", span: 2, isArea: true, isText: false, isSelect: false,
+      value: st.profile[key] || "",
+      set: e => { const p = Object.assign({}, st.profile); p[key] = e.target.value; this.setState({ profile: p }); } });
+
+    const profileGroups = [
+      { title: "Respondent", hint: "Who is answering — used to compare perspectives",
+        fields: [pf("respondentName", "Full name", "Your name"), pf("respondentRole", "Role or title", "e.g. Head of Operations"),
+          pf("respondentDept", "Department", "e.g. Supply chain"), pf("respondentEmail", "Email", "name@company.com")] },
+      { title: "Organisation", hint: "Identification and context",
+        fields: [pf("company", "Organisation name", "Enter name"),
+          ps("industry", "Industry sector", [{ v: "technology", t: "Technology" }, { v: "finance", t: "Financial services" },
+            { v: "healthcare", t: "Healthcare" }, { v: "manufacturing", t: "Manufacturing" }, { v: "retail", t: "Retail" },
+            { v: "consulting", t: "Consulting" }, { v: "education", t: "Education" }, { v: "public", t: "Public sector" },
+            { v: "nonprofit", t: "Non-profit" }, { v: "other", t: "Other" }]),
+          pf("headquarters", "Headquarters", "City, country"), pf("years", "Years in operation", "e.g. 18"),
+          ps("model", "Business model", [{ v: "b2b", t: "B2B" }, { v: "b2c", t: "B2C" }, { v: "b2g", t: "B2G" }, { v: "hybrid", t: "Hybrid" }]),
+          pf("employees", "Total employees", "e.g. 1400")] },
+      { title: "Scale and position", hint: "Financial and market footing",
+        fields: [pf("revenue", "Annual revenue (USD)", "e.g. 96000000"),
+          ps("growth", "Revenue growth, past 3 years", [{ v: "declining", t: "Declining" }, { v: "flat", t: "Flat (0\u20135%)" },
+            { v: "moderate", t: "Moderate (5\u201315%)" }, { v: "strong", t: "Strong (15\u201330%)" }, { v: "rapid", t: "Rapid (30%+)" }]),
+          ps("marketPos", "Market position", [{ v: "leader", t: "Market leader" }, { v: "challenger", t: "Challenger" },
+            { v: "nicher", t: "Nicher" }, { v: "follower", t: "Follower" }]),
+          ps("finHealth", "Financial health", [{ v: "healthy", t: "Healthy \u2014 strong cash position" },
+            { v: "moderate", t: "Moderate pressure" }, { v: "constrained", t: "Significant constraints" }]),
+          pf("budget", "Improvement budget (USD)", "e.g. 900000")] },
+      { title: "Strategic context", hint: "Sets the target profile and the narrative diagnosis",
+        fields: [pa("mission", "Mission", "What is the organisation for?"), pa("vision", "Vision", "Where does it intend to be?"),
+          pa("priorities", "Top strategic priorities", "One per line"),
+          pa("challenge", "Current major challenge or transformation", "The thing keeping leadership awake")] }
+    ];
+
+    // assessment
+    const activeS = st.activeS;
+    const sTabs = ELEMENTS.map(e => {
+      const active = e.k === activeS;
+      const g = this.score(e.k, "des") - this.score(e.k, "cur");
+      return { name: e.name, kind: e.kind === "hard" ? "HARD" : "SOFT", go: () => this.setState({ activeS: e.k }),
+        bg: active ? "rgba(94,231,216,.1)" : "#0D1626", bd: active ? "#2C5F63" : "#17233B",
+        fg: active ? "#E9EEF7" : "#A8B9D2", kindFg: active ? "#5EE7D8" : "#6E82A0",
+        state: st.touched[e.k] ? "gap " + g : "not scored" };
+    });
+    const secDef = ELEMENTS.find(e => e.k === activeS) || ELEMENTS[0];
+    const secGap = this.score(activeS, "des") - this.score(activeS, "cur");
+    const sec = {
+      name: secDef.name, blurb: secDef.blurb,
+      cur: this.score(activeS, "cur"), des: this.score(activeS, "des"),
+      gap: (secGap > 0 ? "+" : "") + secGap, gapFg: secGap >= 25 ? "#E88B6B" : secGap >= 12 ? "#E3C167" : "#5FD6A4",
+      items: secDef.items.map((t, i) => ({
+        text: t, cur: this.val(activeS, i, "cur"), des: this.val(activeS, i, "des"),
+        curLabel: BAND(this.val(activeS, i, "cur")), desLabel: BAND(this.val(activeS, i, "des")),
+        setCur: e => this.set(activeS, i, "cur", Number(e.target.value)),
+        setDes: e => this.set(activeS, i, "des", Number(e.target.value))
+      })),
+      evidence: st.evidence[activeS] || "",
+      setEvidence: e => { const v = Object.assign({}, st.evidence); v[activeS] = e.target.value; this.setState({ evidence: v }); },
+      conf: st.confidence[activeS] || 3, confLabel: CONF[st.confidence[activeS] || 3],
+      setConf: e => { const v = Object.assign({}, st.confidence); v[activeS] = Number(e.target.value); this.setState({ confidence: v }); }
+    };
+    const idx = EK.indexOf(activeS);
+
+    // radar
+    const cx = 170, cy = 150, R = 108;
+    const pt = (i, r) => {
+      const ang = (-90 + i * (360 / 7)) * Math.PI / 180;
+      return [cx + Math.cos(ang) * r, cy + Math.sin(ang) * r];
+    };
+    const poly = vals => EK.map((k, i) => { const p = pt(i, R * vals[k] / 100); return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ");
+    const radar = {
+      cur: poly(cur), des: poly(des),
+      rings: [0.25, 0.5, 0.75, 1].map(f => ({ points: EK.map((k, i) => { const p = pt(i, R * f); return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ") })),
+      spokes: EK.map((k, i) => { const p = pt(i, R); return { x: p[0].toFixed(1), y: p[1].toFixed(1) }; }),
+      labels: EK.map((k, i) => {
+        const p = pt(i, R + 24);
+        return { lx: (p[0] / 340 * 100).toFixed(2), ly: (p[1] / 320 * 100).toFixed(2), text: ELEMENTS[i].short.toUpperCase() };
+      })
+    };
+
+    const bars = ELEMENTS.slice().sort((a, b) => (des[b.k] - cur[b.k]) - (des[a.k] - cur[a.k])).map(e => {
+      const g = des[e.k] - cur[e.k];
+      return { name: e.name, cur: cur[e.k], des: des[e.k], gapText: (g > 0 ? "+" : "") + g,
+        gapFg: g >= 25 ? "#E88B6B" : g >= 12 ? "#E3C167" : "#5FD6A4",
+        kind: e.kind === "hard" ? "HARD" : "SOFT",
+        kindBg: e.kind === "hard" ? "rgba(94,231,216,.09)" : "rgba(196,165,255,.09)",
+        kindFg: e.kind === "hard" ? "#5EE7D8" : "#C4A5FF" };
+    });
+
+    const hardKeys = ELEMENTS.filter(e => e.kind === "hard").map(e => e.k);
+    const softKeys = ELEMENTS.filter(e => e.kind === "soft").map(e => e.k);
+    const hardScore = Math.round(hardKeys.reduce((a, k) => a + cur[k], 0) / hardKeys.length);
+    const softScore = Math.round(softKeys.reduce((a, k) => a + cur[k], 0) / softKeys.length);
+    const hardSoft = [
+      { label: "HARD ELEMENTS", score: hardScore, fg: tone(hardScore), bd: "#1E3040", members: "Strategy · Structure · Systems" },
+      { label: "SOFT ELEMENTS", score: softScore, fg: tone(softScore), bd: "#2A2440", members: "Shared values · Style · Staff · Skills" }
+    ];
+    const hsDiff = hardScore - softScore;
+    const hardSoftNote = Math.abs(hsDiff) < 8
+      ? "Hard and soft elements are broadly in step. Sequencing matters less here than sustaining attention on both."
+      : hsDiff > 0
+        ? "Hard elements lead soft by " + hsDiff + " points — the classic redesign trap. The org chart and the systems have been fixed; belief, behaviour and capability have not caught up, so the redesign will erode."
+        : "Soft elements lead hard by " + Math.abs(hsDiff) + " points. Good people and culture are compensating for weak structure and systems. That works until the goodwill runs out or a key person leaves.";
+
+    const weakest = EK.slice().sort((a, b) => cur[a] - cur[b])[0];
+    const biggestGap = EK.slice().sort((a, b) => (des[b] - cur[b]) - (des[a] - cur[a]))[0];
+    const tensions0 = this.tensionList();
+    const lowConf = EK.filter(k => (st.confidence[k] || 3) <= 2).map(k => ENAME[k]);
+    const narrative = [
+      { text: "Overall alignment sits at " + oCur + " against a target of " + oDes + " — a " + (oDes - oCur) + "-point gap. " +
+        (oCur >= 75 ? "This is a strong baseline; the work is protection, not repair." : oCur >= 55 ? "This is a workable baseline with specific weak joints rather than systemic failure." : "This is a weak baseline: the elements are not holding each other up, and single-point fixes will not hold.") },
+      { text: ENAME[weakest] + " is the weakest element at " + cur[weakest] + ", and " + ENAME[biggestGap] + " carries the largest gap to target at " + (des[biggestGap] - cur[biggestGap]) + " points. Sequence the first intervention there — in the 7S model, the weakest element caps what the others can deliver." },
+      { text: hardSoftNote },
+      { text: tensions0.length ? tensions0.length + " element pairs show material strain, led by " + tensions0[0].title.toLowerCase() + ". Treat these as one system: fixing the higher-scoring element of a strained pair usually widens the tension rather than closing it." : "No pair shows material strain, which is unusual. Before concluding coherence, check whether scores were clustered around the midpoint out of caution." },
+      { text: st.profile.challenge ? "Against the stated challenge — \u201C" + String(st.profile.challenge).slice(0, 160) + "\u201D — the diagnosis suggests this is a " + ENAME[weakest].toLowerCase() + " problem presenting as something else." : "Add the current major challenge to the organisation profile and this diagnosis will connect the scores to the situation you are actually managing." }
+    ];
+    if (lowConf.length) narrative.push({ text: "Low confidence was recorded on " + lowConf.join(", ") + ". Those scores are assumptions to test with evidence before they justify spending." });
+
+    const kpis = [
+      { label: "CURRENT ALIGNMENT", value: oCur, fg: tone(oCur), note: oCur >= 75 ? "Strong" : oCur >= 55 ? "Moderate" : "Needs attention" },
+      { label: "TARGET ALIGNMENT", value: oDes, fg: "#C4A5FF", note: "Where the strategy needs you" },
+      { label: "AGGREGATE GAP", value: (oDes - oCur), fg: tone(100 - (oDes - oCur) * 2), note: "Points to close" },
+      { label: "TENSIONS FOUND", value: tensions0.length, fg: tensions0.length > 3 ? "#E88B6B" : "#5FD6A4", note: "Strained element pairs" }
+    ];
+
+    // matrix
+    const strainBg = s => {
+      if (s === null) return "#0A1120";
+      const t = Math.min(1, s / 35);
+      const r = Math.round(31 + t * 109), g = Math.round(111 - t * 53), b = Math.round(99 - t * 41);
+      return "rgb(" + r + "," + g + "," + b + ")";
+    };
+    const matrix = {
+      heads: ELEMENTS.map(e => e.short.slice(0, 4).toUpperCase()),
+      rows: ELEMENTS.map(a => ({
+        head: a.short.slice(0, 6),
+        cells: ELEMENTS.map(b => {
+          if (a.k === b.k) return { bg: "#0A1120", fg: "#2A3A57", text: "\u2014", title: a.name };
+          const s = Math.abs(cur[a.k] - cur[b.k]);
+          return { bg: strainBg(s), fg: s > 18 ? "#FFF0EA" : "#CFE6E2", text: String(s),
+            title: a.name + " vs " + b.name + " \u2014 strain " + s };
+        })
+      }))
+    };
+
+    const sevMap = { critical: { l: "CRITICAL", bg: "rgba(232,107,107,.12)", fg: "#E88B8B" },
+      high: { l: "HIGH", bg: "rgba(232,139,107,.12)", fg: "#E8A98B" },
+      moderate: { l: "MODERATE", bg: "rgba(227,193,103,.12)", fg: "#E3C167" } };
+    const tensions = tensions0.map(t => {
+      const sv = sevMap[t.severity];
+      const active = st.selTension === t.id;
+      return Object.assign({}, t, { sevLabel: sv.l, sevBg: sv.bg, sevFg: sv.fg,
+        strainPct: Math.min(100, Math.round(t.strain / 40 * 100)),
+        bg: active ? "rgba(94,231,216,.06)" : "#0A1120", bd: active ? "#2C5F63" : "#17233B",
+        select: () => this.setState({ selTension: active ? null : t.id }),
+        urgency: t.severity === "critical" ? "Requires immediate intervention" : t.severity === "high" ? "Address within this planning cycle" : "Monitor and plan" });
+    });
+    const selT = tensions.find(t => t.id === st.selTension) || null;
+    const tensionSummary = tensions0.length
+      ? tensions0.length + " element pairs show material strain. Severity reflects the score distance between the two elements and whether both are weak in absolute terms."
+      : "No element pair shows material strain at the current scores.";
+
+    // Tension network — the 7S diamond with strain drawn as physical tension between nodes
+    const POS = { strategy: [290, 62], structure: [500, 158], systems: [500, 338],
+      skills: [382, 434], staff: [198, 434], style: [80, 248], sharedValues: [290, 248] };
+    const sevColor = { critical: "#E86B6B", high: "#E8945C", moderate: "#E3C167" };
+    const h = React.createElement;
+    // Bubble placement: start at the midpoint, then relax apart until no two overlap.
+    const bubbles = tensions0.map((t, i) => {
+      const a = POS[t.pair[0]], b = POS[t.pair[1]];
+      const dx = b[0] - a[0], dy = b[1] - a[1];
+      const len = Math.sqrt(dx * dx + dy * dy) || 1;
+      const slide = ((i % 3) - 1) * 0.11;
+      return { x: a[0] + dx * (0.5 + slide), y: a[1] + dy * (0.5 + slide),
+        px: -dy / len, py: dx / len, w: t.strain < 15 ? 62 : 32 };
+    });
+    for (let pass = 0; pass < 24; pass++) {
+      let moved = false;
+      for (let i = 0; i < bubbles.length; i++) {
+        for (let j = i + 1; j < bubbles.length; j++) {
+          const A = bubbles[i], B = bubbles[j];
+          const need = (A.w + B.w) / 2 + 6;
+          let ddx = B.x - A.x, ddy = B.y - A.y;
+          let d = Math.sqrt(ddx * ddx + ddy * ddy);
+          if (d >= need) continue;
+          if (d < 0.001) { ddx = A.px; ddy = A.py; d = 1; }
+          const push = (need - d) / 2;
+          A.x -= ddx / d * push; A.y -= ddy / d * push;
+          B.x += ddx / d * push; B.y += ddy / d * push;
+          moved = true;
+        }
+      }
+      if (!moved) break;
+    }
+    const edgeEls = tensions0.map((t, i) => {
+      const a = POS[t.pair[0]], b = POS[t.pair[1]];
+      const active = st.selTension === t.id;
+      const dim = st.selTension && !active;
+      const mx = bubbles[i].x, my = bubbles[i].y;
+      const bothLow = t.strain < 15;
+      const col = sevColor[t.severity];
+      const op = dim ? 0.12 : active ? 1 : 0.6;
+      const lop = dim ? 0 : 1;
+      const kids = [
+        h("line", { key: "l", x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: col,
+          strokeWidth: active ? 6 : Math.max(2, Math.min(6, t.strain / 7)),
+          strokeOpacity: op, strokeDasharray: t.severity === "critical" ? "9 5" : undefined, strokeLinecap: "round" }),
+        h("line", { key: "hit", x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: "transparent", strokeWidth: 22 }),
+        bothLow
+          ? h("rect", { key: "b", x: mx - 30, y: my - 11, width: 60, height: 22, rx: 11, fill: "#0A1120", stroke: col, strokeWidth: 1.2, opacity: lop })
+          : h("circle", { key: "b", cx: mx, cy: my, r: 15, fill: "#0A1120", stroke: col, strokeWidth: 1.4, opacity: lop }),
+        h("text", { key: "t", x: mx, y: my, dy: bothLow ? 3.5 : 4.5, textAnchor: "middle",
+          fontSize: bothLow ? 9 : 12, fontWeight: 700, fontFamily: "JetBrains Mono, monospace",
+          fill: col, opacity: lop }, bothLow ? "BOTH LOW" : String(t.strain))
+      ];
+      return h("g", { key: t.id, style: { cursor: "pointer" },
+        onClick: () => this.setState({ selTension: active ? null : t.id }) }, kids);
+    });
+    const involved = {};
+    tensions0.forEach(t => {
+      const w = t.severity === "critical" ? 3 : t.severity === "high" ? 2 : 1;
+      involved[t.pair[0]] = (involved[t.pair[0]] || 0) + w;
+      involved[t.pair[1]] = (involved[t.pair[1]] || 0) + w;
+    });
+    const maxInv = Math.max(1, Math.max.apply(null, [0].concat(EK.map(k => involved[k] || 0))));
+    const selPair = tensions0.filter(t => t.id === st.selTension)[0];
+    const nodeEls = ELEMENTS.map(e => {
+      const p = POS[e.k];
+      const load = involved[e.k] || 0;
+      const isCore = e.k === "sharedValues";
+      const r = isCore ? 46 : 38;
+      const sel = !!(selPair && selPair.pair.indexOf(e.k) >= 0);
+      const hot = load >= maxInv * 0.66;
+      return h("g", { key: e.k }, [
+        h("circle", { key: "ring", cx: p[0], cy: p[1], r: r + 8 + Math.round(load / maxInv * 10), fill: "none",
+          stroke: load ? (hot ? "rgba(232,107,107,.35)" : "rgba(227,193,103,.28)") : "transparent", strokeWidth: 2 }),
+        h("circle", { key: "c", cx: p[0], cy: p[1], r: r,
+          fill: isCore ? "#12283A" : e.kind === "hard" ? "#0E2130" : "#191A33",
+          stroke: sel ? "#5EE7D8" : hot ? "#E86B6B" : load > 0 ? "#8A6A46" : "#26364F",
+          strokeWidth: sel ? 2.6 : 1.4 }),
+        h("text", { key: "s", x: p[0], y: p[1] - 2, textAnchor: "middle", fontSize: isCore ? 20 : 18,
+          fontWeight: 700, fontFamily: "JetBrains Mono, monospace", fill: tone(cur[e.k]) }, String(cur[e.k])),
+        h("text", { key: "n", x: p[0], y: p[1] + 16, textAnchor: "middle", fontSize: 11,
+          fontFamily: "JetBrains Mono, monospace", fill: "#8FA3C0" }, e.short.toUpperCase()),
+        h("text", { key: "l", x: p[0], y: p[1] + r + 25, textAnchor: "middle", fontSize: 10,
+          fontFamily: "JetBrains Mono, monospace", fill: load ? "#93A6C2" : "#4E5F7C" },
+          load ? load + (load === 1 ? " strain pt" : " strain pts") : "clear")
+      ]);
+    });
+    const graphSvg = h("svg", { viewBox: "0 0 580 528",
+      style: { width: "100%", height: "auto", display: "block" } }, [
+      h("g", { key: "edges" }, edgeEls), h("g", { key: "nodes" }, nodeEls)
+    ]);
+    const sevCount = { critical: 0, high: 0, moderate: 0 };
+    tensions0.forEach(t => { sevCount[t.severity] += 1; });
+    const tenTotal = Math.max(1, tensions0.length);
+    const sevBars = [
+      { label: "Critical", n: sevCount.critical, pct: Math.round(sevCount.critical / tenTotal * 100), c: "#E86B6B" },
+      { label: "High", n: sevCount.high, pct: Math.round(sevCount.high / tenTotal * 100), c: "#E8945C" },
+      { label: "Moderate", n: sevCount.moderate, pct: Math.round(sevCount.moderate / tenTotal * 100), c: "#E3C167" }
+    ];
+    const hotspot = EK.slice().sort((a, b) => (involved[b] || 0) - (involved[a] || 0))[0];
+    const hotspotNote = tensions0.length
+      ? ENAME[hotspot] + " is the epicentre — it appears in more strained pairs than any other element, so intervening there relieves the most tension across the system."
+      : "No epicentre: strain is evenly distributed and low.";
+
+    // simulation — costs, budget and ranking all derive from the profile stage
+    const proj = this.projection();
+    const budget = Number(st.profile.budget) || 0;
+    const spent = proj.sel.reduce((a, i) => a + this.costOf(i), 0);
+    const remaining = budget - spent;
+    const suggested = this.suggestedBudget();
+    const projOverall = Math.round(EK.reduce((a, k) => a + proj.next[k], 0) / 7);
+    const months = proj.sel.length ? Math.max.apply(null, proj.sel.map(i => i.months)) : 0;
+    const loadPct = proj.sel.length;
+    const sim = {
+      budgetText: this.money(budget), spentText: this.money(spent),
+      remainingText: this.money(Math.max(0, remaining)),
+      budgetFg: remaining < 0 ? "#E88B6B" : remaining < budget * 0.2 ? "#E3C167" : "#5FD6A4",
+      spentPct: budget ? Math.min(100, Math.round(spent / budget * 100)) : 0,
+      projected: projOverall, deltaText: (projOverall - oCur >= 0 ? "+" : "") + (projOverall - oCur),
+      deltaFg: projOverall >= oCur ? "#5FD6A4" : "#E88B6B",
+      load: loadPct + " / 4", loadFg: proj.fatigue ? "#E88B6B" : "#5FD6A4",
+      loadNote: proj.fatigue ? "Over capacity — fatigue applied" : "Concurrent initiatives within capacity",
+      months: months || "\u2014",
+      budgetValue: st.profile.budget || "",
+      setBudget: e => { const p = Object.assign({}, st.profile); p.budget = e.target.value.replace(/[^0-9]/g, ""); this.setState({ profile: p }); },
+      suggestedText: suggested ? this.money(suggested) : "",
+      hasSuggestion: !!suggested,
+      applySuggested: () => { const p = Object.assign({}, st.profile); p.budget = String(suggested); this.setState({ profile: p }); this.flash("Budget set to " + this.money(suggested) + "."); },
+      suggestNote: suggested
+        ? "Benchmark for " + (st.profile.employees ? st.profile.employees + " staff" : "your size") + " at " + (st.profile.finHealth || "moderate") + " financial health: " + this.money(suggested) + " (" + (st.profile.finHealth === "healthy" ? "1.5" : st.profile.finHealth === "constrained" ? "0.5" : "1.0") + "% of stated revenue)."
+        : "Add annual revenue and financial health in the organisation profile and a benchmark budget will be calculated for you.",
+      scaleNote: "Costs are scaled \u00D7" + this.sizeFactor().toFixed(2) + " for " + (st.profile.employees ? st.profile.employees + " employees" : "an unspecified headcount") + (st.profile.finHealth === "constrained" ? " and constrained finances" : st.profile.finHealth === "healthy" ? " and a healthy balance sheet" : "") + ".",
+      warn: remaining < 0 || proj.fatigue > 0,
+      warnText: remaining < 0
+        ? "Portfolio exceeds the available budget by " + this.money(Math.abs(remaining)) + ". In a real engagement this is the moment to sequence rather than deselect — decide what waits."
+        : "Five or more concurrent initiatives triggers change fatigue: staff, style and shared values are taking a penalty. Fewer, sequenced moves usually deliver more.",
+      projection: ELEMENTS.map(e => {
+        const to = proj.next[e.k], from = cur[e.k];
+        return { name: e.name, from: from, to: to,
+          toFg: to > from ? "#5FD6A4" : to < from ? "#E88B6B" : "#8FA3C0",
+          barBg: to >= from ? "linear-gradient(90deg,#38B0C4,#5EE7D8)" : "linear-gradient(90deg,#8C3A3A,#E88B6B)" };
+      })
+    };
+    const gapRank = EK.slice().sort((a, b) => (des[b] - cur[b]) - (des[a] - cur[a]));
+    const tensionEls = {};
+    tensions0.forEach(t => { tensionEls[t.pair[0]] = true; tensionEls[t.pair[1]] = true; });
+    const ranked = INTERVENTIONS.map(iv => {
+      const gap = des[iv.primary] - cur[iv.primary];
+      let fit = gap * 2;
+      if (gapRank.indexOf(iv.primary) < 3) fit += 25;
+      if (tensionEls[iv.primary]) fit += 18;
+      if (cur[iv.primary] < 50) fit += 15;
+      Object.keys(iv.eff).forEach(k => { if (iv.eff[k] < 0 && cur[k] < 55) fit -= 12; });
+      return { iv: iv, fit: fit, gap: gap, cost: this.costOf(iv) };
+    }).sort((a, b) => b.fit - a.fit);
+    const topFit = ranked.length ? Math.max(1, ranked[0].fit) : 1;
+    const interventions = ranked.map(r => {
+      const iv = r.iv;
+      const on = st.selected.indexOf(iv.id) >= 0;
+      const eff = Object.keys(iv.eff).map(k => (iv.eff[k] > 0 ? "+" : "") + iv.eff[k] + " " + ENAME[k].toLowerCase()).join(" · ");
+      const rel = r.fit / topFit;
+      const tier = rel >= 0.72 ? "PRIORITY" : rel >= 0.42 ? "SUPPORTING" : "LOW FIT";
+      const why = rel >= 0.72
+        ? ENAME[iv.primary] + " is one of your widest gaps at " + r.gap + " points"
+        : rel >= 0.42
+          ? "Supports " + ENAME[iv.primary].toLowerCase() + ", currently scoring " + cur[iv.primary]
+          : ENAME[iv.primary] + " already scores " + cur[iv.primary] + " — limited return here";
+      return { name: iv.name, primaryName: ENAME[iv.primary].toUpperCase(), months: iv.months,
+        costText: this.money(r.cost), costFg: r.cost > remaining && !on ? "#E88B6B" : "#E9EEF7",
+        effectText: eff, check: on ? "\u2713" : "", tier: tier, why: why,
+        tierBg: tier === "PRIORITY" ? "rgba(95,214,164,.12)" : tier === "SUPPORTING" ? "rgba(227,193,103,.1)" : "rgba(110,130,160,.08)",
+        tierFg: tier === "PRIORITY" ? "#5FD6A4" : tier === "SUPPORTING" ? "#E3C167" : "#6E82A0",
+        boxBg: on ? "#5EE7D8" : "transparent", boxBd: on ? "#5EE7D8" : "#2A3A57",
+        bg: on ? "rgba(94,231,216,.06)" : "#0D1626", bd: on ? "#2C5F63" : "#17233B",
+        toggle: () => {
+          const sel = st.selected.slice();
+          const at = sel.indexOf(iv.id);
+          if (at >= 0) sel.splice(at, 1); else sel.push(iv.id);
+          this.setState({ selected: sel });
+        } };
+    });
+
+    // action plan
+    const actions = st.actions.map((a, i) => {
+      const upd = (field, v) => {
+        const list = st.actions.map(x => Object.assign({}, x));
+        list[i][field] = v; this.setState({ actions: list });
+      };
+      return { elementName: ENAME[a.element] || "General", action: a.action || "", owner: a.owner || "",
+        due: a.due || "", status: a.status || "Not started",
+        setAction: e => upd("action", e.target.value), setOwner: e => upd("owner", e.target.value),
+        setDue: e => upd("due", e.target.value), setStatus: e => upd("status", e.target.value),
+        remove: () => this.setState({ actions: st.actions.filter((x, j) => j !== i) }) };
+    });
+
+    // admin
+    const recs = st.responses;
+    const rows = recs.slice().reverse().map(r => ({
+      id: r.id, company: (r.profile || {}).company || "\u2014",
+      respondent: (r.profile || {}).respondentName || "Anonymous",
+      role: [(r.profile || {}).respondentRole, (r.profile || {}).respondentDept].filter(Boolean).join(" / ") || "\u2014",
+      align: r.overallCur, alignFg: tone(r.overallCur), gap: "+" + (r.overallDes - r.overallCur),
+      date: String(r.submittedAt).slice(0, 10),
+      remove: () => this.setState({ responses: st.responses.filter(x => x.id !== r.id), adminNote: r.id + " deleted." })
+    }));
+    const meanAll = recs.length ? Math.round(recs.reduce((a, r) => a + r.overallCur, 0) / recs.length) : 0;
+    const weakCount = {};
+    recs.forEach(r => { const w = EK.slice().sort((a, b) => r.scoresCur[a] - r.scoresCur[b])[0]; weakCount[w] = (weakCount[w] || 0) + 1; });
+    const commonWeak = Object.keys(weakCount).sort((a, b) => weakCount[b] - weakCount[a])[0];
+    const adminKpis = [
+      { label: "RESPONSES", value: recs.length, fg: "#5EE7D8", note: "Stored in this browser" },
+      { label: "MEAN ALIGNMENT", value: recs.length ? meanAll : "\u2014", fg: recs.length ? tone(meanAll) : "#4E5F7C", note: "Across all responses" },
+      { label: "MOST COMMON WEAK POINT", value: commonWeak ? ENAME[commonWeak] : "\u2014", fg: "#E3C167", note: commonWeak ? weakCount[commonWeak] + " of " + recs.length + " responses" : "No data yet" },
+      { label: "ACTIONS LOGGED", value: recs.reduce((a, r) => a + (r.actions || []).length, 0), fg: "#C4A5FF", note: "Across all plans" }
+    ];
+    const aggregate = ELEMENTS.map(e => {
+      if (!recs.length) return { name: e.name, mean: 0, spread: "\u2014", min: 0, range: 0 };
+      const vals = recs.map(r => r.scoresCur[e.k]);
+      const mean = Math.round(vals.reduce((a, v) => a + v, 0) / vals.length);
+      const mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+      return { name: e.name, mean: mean, spread: mx - mn, min: mn, range: Math.max(1, mx - mn) };
+    });
+
+    const pin = this.props.adminPin || "7SADMIN";
+    const submit = () => {
+      if (!st.profile.company) { this.setState({ screen: "profile" }); this.flash("Add the organisation name first."); return; }
+      const snap = this.snapshot();
+      this.setState({ responses: st.responses.concat([snap]), seq: st.seq + 1, screen: "results" });
+      this.flash("Saved as " + snap.id + ".");
+    };
+
+    const USER = this.props.username || "kamran";
+    const PASS = this.props.password || "kamran";
+
+    const prepList = [
+      { n: "01", t: "Who you are", d: "Your name, role and department. Multiple people can complete the assessment separately — the administrator compares their answers to find where perception diverges." },
+      { n: "02", t: "Organisation basics", d: "Legal name, industry, headquarters, years in operation, business model and total headcount. Headcount scales the cost of every intervention later." },
+      { n: "03", t: "Scale and financial position", d: "Annual revenue, three-year growth trend, market position and an honest read on financial health. These set your benchmark improvement budget." },
+      { n: "04", t: "Strategic context", d: "Mission, vision, your top strategic priorities and the single biggest challenge or transformation in flight. The diagnosis is written against this." },
+      { n: "05", t: "Evidence, not impressions", d: "For each of the seven elements, have one concrete example ready — an incident, a metric, a recent decision. Scores without evidence are opinion." }
+    ];
+    const methodList = [
+      { t: "How tensions are found", d: "Every pair of the seven elements is compared. If their current scores sit 15 or more points apart, that pair is flagged as a tension — one element is running ahead of the other. Pairs where both score below 55 are flagged too, as jointly weak. The wider the distance, the higher the severity." },
+      { t: "How the simulation works", d: "The twelve interventions, their prices and their effects are illustrative teaching values, not benchmark data — treat the simulation as a decision exercise, not a forecast. What is real is the tailoring: costs scale to your headcount and financial health, the benchmark budget comes from your revenue, and interventions are ranked PRIORITY or LOW FIT against your own weakest elements." }
+    ];
+
+    return {
+      authed: st.authed, needsLogin: !st.authed,
+      loginUser: st.loginUser, loginPass: st.loginPass, loginError: st.loginError,
+      setLoginUser: e => this.setState({ loginUser: e.target.value, loginError: "" }),
+      setLoginPass: e => this.setState({ loginPass: e.target.value, loginError: "" }),
+      submitLogin: () => st.loginUser.trim().toLowerCase() === USER && st.loginPass === PASS
+        ? this.setState({ authed: true, loginUser: "", loginPass: "", loginError: "" })
+        : this.setState({ loginError: "Incorrect username or password." }),
+      loginKey: e => { if (e.key === "Enter") { const ok = st.loginUser.trim().toLowerCase() === USER && st.loginPass === PASS; ok ? this.setState({ authed: true, loginUser: "", loginPass: "", loginError: "" }) : this.setState({ loginError: "Incorrect username or password." }); } },
+      logout: () => this.setState({ authed: false, adminUnlocked: false, screen: "home" }),
+      prepList: prepList, methodList: methodList,
+      graphSvg: graphSvg,
+      sevBars: sevBars, hotspotNote: hotspotNote,
+      exportReportHtml: () => { this.download("7s-report-" + (st.profile.company || "organisation").replace(/[^a-z0-9]+/gi, "-").toLowerCase() + ".html", this.buildReport(), "text/html"); this.flash("HTML report downloaded."); },
+      exportReportPdf: () => { this.printReport(); this.flash("Print dialog opening — choose \u201CSave as PDF\u201D."); },
+      isHome: screen === "home", isProfile: screen === "profile", isAssessment: screen === "assessment",
+      isResults: screen === "results", isTensions: screen === "tensions", isSim: screen === "sim",
+      isPlan: screen === "plan", isAdmin: screen === "admin",
+      nav: nav, progress: progress, ringNodes: ringNodes, homeFeatures: homeFeatures,
+      db: { count: recs.length },
+      ctaLabel: touchedCount ? "Resume assessment" : "Start the diagnostic",
+      startFlow: () => this.setState({ screen: st.profile.company ? "assessment" : "profile" }),
+      loadDemo: () => { const d = this.demo(); this.setState(Object.assign({}, d, { screen: "results", selected: ["i2", "i10"] })); this.flash("Worked example loaded."); },
+      goAdmin: go("admin"), goAssessment: go("assessment"), goTensions: go("tensions"), goSim: go("sim"),
+      goPlan: enterPlan,
+      noActions: actions.length === 0,
+      emptyActionsNote: Object.keys(st.touched).length
+        ? "No actions yet. Use \u201CRe-seed from diagnosis\u201D to generate them from your weakest elements, or add one manually."
+        : "Score the 7S assessment first — the plan seeds itself from your largest gaps and the interventions you buy.",
+      hasAggregate: recs.length > 0,
+      saveNote: "Saved automatically on this device",
+      profileGroups: profileGroups,
+      sTabs: sTabs, sec: sec,
+      prevSection: () => this.setState({ activeS: EK[Math.max(0, idx - 1)] }),
+      nextSection: () => this.setState({ activeS: EK[Math.min(6, idx + 1)] }),
+      submitAssessment: submit,
+      orgLine: (st.profile.company || "Unnamed organisation") + (st.profile.respondentName ? " · " + st.profile.respondentName : "") + (st.profile.industry ? " · " + st.profile.industry : ""),
+      kpis: kpis, kpiOverall: oCur, radar: radar, bars: bars,
+      hardSoft: hardSoft, hardSoftNote: hardSoftNote, narrative: narrative,
+      matrix: matrix, tensions: tensions, noTensions: tensions.length === 0,
+      tensionSummary: tensionSummary, hasSelectedTension: !!selT, selTension: selT || {},
+      sim: sim, interventions: interventions,
+      clearSim: () => this.setState({ selected: [] }),
+      actions: actions,
+      addAction: () => this.setState({ actions: st.actions.concat([{ uid: "n" + Date.now(), element: weakest, action: "", owner: "", due: "", status: "Not started" }]) }),
+      reseedActions: () => { this.setState({ actions: this.seedActions() }); this.flash("Plan re-seeded from the current diagnosis."); },
+      exportActionsCsv: () => { this.download("7s-action-plan.csv", this.actionRows([this.snapshot()])); this.flash("Action plan exported."); },
+      exportOneCsv: () => { this.download("7s-my-scores.csv", this.longRows([this.snapshot()])); this.flash("Scores exported."); },
+      exportOneJson: () => { this.download("7s-response.json", JSON.stringify(this.snapshot(), null, 2), "application/json"); this.flash("JSON exported \u2014 send this file to your administrator."); },
+      adminLocked: !st.adminUnlocked, adminOpen: st.adminUnlocked,
+      pinInput: st.pinInput, pinError: st.pinError,
+      setPin: e => this.setState({ pinInput: e.target.value, pinError: "" }),
+      tryUnlock: () => st.pinInput === pin
+        ? this.setState({ adminUnlocked: true, pinInput: "", pinError: "" })
+        : this.setState({ pinError: "Incorrect PIN." }),
+      adminKpis: adminKpis, aggregate: aggregate, rows: rows, noRows: rows.length === 0,
+      adminNote: st.adminNote || (recs.length ? recs.length + " responses stored. Export before clearing browser data." : "Nothing stored yet."),
+      exportWideCsv: () => { if (!recs.length) return this.flash("No responses to export."); this.download("7s-responses-wide.csv", this.wideRows(recs)); this.flash("Wide CSV exported."); },
+      exportLongCsv: () => { if (!recs.length) return this.flash("No responses to export."); this.download("7s-responses-long.csv", this.longRows(recs)); this.flash("Long CSV exported."); },
+      exportAllActionsCsv: () => { if (!recs.length) return this.flash("No responses to export."); this.download("7s-actions-all.csv", this.actionRows(recs)); this.flash("Actions CSV exported."); },
+      importJson: e => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const rd = new FileReader();
+        rd.onload = () => {
+          try {
+            const parsed = JSON.parse(rd.result);
+            const incoming = Array.isArray(parsed) ? parsed : [parsed];
+            const existing = this.state.responses.map(r => r.id);
+            let seq = this.state.seq;
+            const add = [];
+            incoming.forEach(r => {
+              if (!r || !r.scoresCur) return;
+              let id = r.id;
+              if (!id || existing.indexOf(id) >= 0) { seq += 1; id = "RSP-" + String(seq).padStart(4, "0"); }
+              add.push(Object.assign({}, r, { id: id }));
+            });
+            if (!add.length) return this.flash("No valid responses in that file.");
+            this.setState({ responses: this.state.responses.concat(add), seq: seq, adminNote: add.length + " response(s) imported." });
+            this.flash(add.length + " response(s) imported.");
+          } catch (err) { this.flash("Could not read that file."); }
+        };
+        rd.readAsText(file);
+        e.target.value = "";
+      },
+      wipeAll: () => { if (confirm("Delete all stored responses? Export first — this cannot be undone.")) { this.setState({ responses: [], adminNote: "All responses deleted." }); this.flash("All responses deleted."); } },
+      toast: { on: !!st.toast, text: st.toast }
+    };
+  }
+}
+
+</script>
+</body>
+</html>
